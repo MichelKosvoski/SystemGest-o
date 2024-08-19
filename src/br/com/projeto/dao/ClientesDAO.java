@@ -34,7 +34,7 @@ public class ClientesDAO {
     public void cadastrarCliente(Clientes obj) {
         try {
 
-            String sql = "insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep,endereco, numero, complemento, bairro, cidade, estado)"
+            String sql = "insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep,endereco, complemento, bairro, cidade, estado)"
                     + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -46,14 +46,15 @@ public class ClientesDAO {
                 stmt.setString(6, obj.getCelular());
                 stmt.setString(7, obj.getCep());
                 stmt.setString(8, obj.getEndereco());
-                stmt.setString(9, obj.getNumero());
+                stmt.setInt(9, obj.getNumero());
                 stmt.setString(10, obj.getComplemento());
                 stmt.setString(11, obj.getBairro());
                 stmt.setString(12, obj.getCidade());
-                stmt.setString(13, obj.getEstado());
+                stmt.setString(13, obj.getUf());
 
                 // 3 passo executar o comando sql]
                 stmt.execute();
+                stmt.close();
             }
 
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
@@ -67,11 +68,11 @@ public class ClientesDAO {
 
     // Metodo alterarCliente
     public void alterarCliente(Clientes obj) {
-        
+
         try {
 
             String sql = "update tb_clientes set nome=?, rg=?, cpf=?, email=?, telefone=?, celular=?, cep=?,"
-                        + "endereco=?, numero?, complemento?, bairro?, cidade?, estado? where id =?";
+                    + "endereco=?, numero?, complemento?, bairro?, cidade?, estado? where id =?";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, obj.getNome());
@@ -82,12 +83,12 @@ public class ClientesDAO {
                 stmt.setString(6, obj.getCelular());
                 stmt.setString(7, obj.getCep());
                 stmt.setString(8, obj.getEndereco());
-                stmt.setString(9, obj.getNumero());
+                stmt.setInt(9, obj.getNumero());
                 stmt.setString(10, obj.getComplemento());
                 stmt.setString(11, obj.getBairro());
                 stmt.setString(12, obj.getCidade());
-                stmt.setString(13, obj.getEstado());
-                
+                stmt.setString(13, obj.getUf());
+
                 stmt.setInt(14, obj.getId());
 
                 // 3 passo executar o comando sql]
@@ -105,14 +106,14 @@ public class ClientesDAO {
 
     // Metodo deletarCliente
     public void deletarCliente(Clientes obj) {
-        
+
         try {
 
             String sql = "delete from tb_clientes where id = ?";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setInt(1, obj.getId());
-           
+
                 // 3 passo executar o comando sql]
                 stmt.execute();
             }
@@ -123,7 +124,7 @@ public class ClientesDAO {
             JOptionPane.showMessageDialog(null, "Erro:" + erro);
 
         }
-        
+
     }
 
     // Metodo de Listar Todos os Clientes
@@ -150,7 +151,7 @@ public class ClientesDAO {
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
                 obj.setEndereco(rs.getString("Endereco"));
-                obj.setNumero(rs.getString("numero"));
+                obj.setNumero(rs.getInt("numero"));
                 obj.setComplemento(rs.getString("complemento"));
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));

@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"br.com.projeto.dao"},{"l":"br.com.projeto.jbdc"},{"l":"br.com.projeto.model"},{"l":"br.com.projeto.view"}];updateSearchResults();

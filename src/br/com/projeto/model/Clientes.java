@@ -19,14 +19,11 @@ public class Clientes {
     private String celular;
     private String cep;
     private String endereco;
-    private String numero;
-    private int number;
+    private int numero;
     private String complemento;
     private String bairro;
     private String cidade;
     private String uf;
-    
-    //Getter e set
 
     public int getId() {
         return id;
@@ -100,20 +97,12 @@ public class Clientes {
         this.endereco = endereco;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getComplemento() {
@@ -147,11 +136,7 @@ public class Clientes {
     public void setUf(String uf) {
         this.uf = uf;
     }
-
-    public String getEstado() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
     
 }
+
+  
