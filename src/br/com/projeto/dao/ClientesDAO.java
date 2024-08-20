@@ -34,7 +34,7 @@ public class ClientesDAO {
     public void cadastrarCliente(Clientes obj) {
         try {
 
-            String sql = "insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep,endereco, complemento, bairro, cidade, estado)"
+            String sql = "insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep,endereco, numero, complemento, bairro, cidade, estado)"
                     + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
