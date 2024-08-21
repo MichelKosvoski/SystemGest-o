@@ -18,12 +18,12 @@ public class Frmcliente extends javax.swing.JFrame {
 
     // Metodo Listar
     public void listar() {
-
+        
         ClientesDAO dao = new ClientesDAO();
         List<Clientes> lista = dao.listarClientes();
         DefaultTableModel dados = (DefaultTableModel) tabelaClientes.getModel();
         dados.setNumRows(0);
-
+        
         for (Clientes c : lista) {
             dados.addRow(new Object[]{
                 c.getId(),
@@ -34,6 +34,7 @@ public class Frmcliente extends javax.swing.JFrame {
                 c.getTelefone(),
                 c.getCelular(),
                 c.getCep(),
+                c.getEndereco(),
                 c.getNumero(),
                 c.getComplemento(),
                 c.getBairro(),
@@ -42,7 +43,7 @@ public class Frmcliente extends javax.swing.JFrame {
             });
         }
     }
-
+    
     public Frmcliente() {
         initComponents();
         this.getContentPane().setBackground(Color.white);
@@ -153,6 +154,11 @@ public class Frmcliente extends javax.swing.JFrame {
                 "Código", "Nome", "RG", "CPF", "E-mail", "Telefone", "Celular", "Cep", "Endereço", "N°", "Comp", "Bairro", "Cidade", "UF"
             }
         ));
+        tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaClientes);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -529,23 +535,16 @@ public class Frmcliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
-        // Botao de salvar
+        // Editar
 
         Clientes obj = new Clientes();
-
+        
         obj.setNome(txtnome.getText());
         obj.setRg(txtrg.getText());
         obj.setCpf(txtcpf.getText());
         obj.setEmail(txtemail.getText());
         obj.setTelefone(txttelefone.getText());
+        obj.setCelular(txtcelular.getText());
         obj.setCep(txtcep.getText());
         obj.setEndereco(txtendereco.getText());
         obj.setNumero(Integer.parseInt(txtnumero.getText()));
@@ -553,9 +552,44 @@ public class Frmcliente extends javax.swing.JFrame {
         obj.setBairro(txtbairro.getText());
         obj.setCidade(txtcidade.getText());
         obj.setUf(cbuf.getSelectedItem().toString());
-
+        
+        obj.setId(Integer.parseInt(txtcodigo.getText()));
+        
         ClientesDAO dao = new ClientesDAO();
-        dao.cadastrarCliente(obj);
+        dao.alterarCliente(obj);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // Deletar
+        Clientes obj = new Clientes();
+        
+        obj.setId(Integer.parseInt(txtcodigo.getText()));
+        
+        ClientesDAO dao = new ClientesDAO();
+        dao.deletarCliente(obj);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void btnsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarActionPerformed
+        // Botao de salvar
+
+        Clientes obj = new Clientes();
+        
+        obj.setNome(txtnome.getText());
+        obj.setRg(txtrg.getText());
+        obj.setCpf(txtcpf.getText());
+        obj.setEmail(txtemail.getText());
+        obj.setTelefone(txttelefone.getText());
+        obj.setCelular(txtcelular.getText());
+        obj.setCep(txtcep.getText());
+        obj.setEndereco(txtendereco.getText());
+        obj.setNumero(Integer.parseInt(txtnumero.getText()));
+        obj.setComplemento(txtcomplemento.getText());
+        obj.setBairro(txtbairro.getText());
+        obj.setCidade(txtcidade.getText());
+        obj.setUf(cbuf.getSelectedItem().toString());
+        
+        ClientesDAO dao = new ClientesDAO();
+        dao.deletarCliente(obj);
 
     }//GEN-LAST:event_btnsalvarActionPerformed
 
@@ -576,6 +610,28 @@ public class Frmcliente extends javax.swing.JFrame {
         // Carrega Lista
         listar();
     }//GEN-LAST:event_formWindowActivated
+
+    private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
+        // Pegar os dados
+        jTabbedPane1.setSelectedIndex(0);
+        
+        txtcodigo.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 0).toString());
+        txtnome.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 1).toString());
+        txtrg.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 2).toString());
+        txtcpf.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 3).toString());
+        txtemail.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 4).toString());
+        txttelefone.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 5).toString());
+        txtcelular.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 6).toString());
+        txtcep.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 7).toString());
+        txtendereco.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 8).toString());
+        txtnumero.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 9).toString());
+        txtcomplemento.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 10).toString());
+        txtbairro.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 11).toString());
+        txtcidade.setText(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 12).toString());
+        cbuf.setSelectedItem(tabelaClientes.getValueAt(tabelaClientes.getSelectedRow(), 13).toString());
+        
+
+    }//GEN-LAST:event_tabelaClientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -654,7 +710,7 @@ public class Frmcliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private static class DefaultTable {
-
+        
         public DefaultTable() {
         }
     }
