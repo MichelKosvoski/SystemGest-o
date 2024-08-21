@@ -71,7 +71,7 @@ public class ClientesDAO {
         try {
 
             String sql = "update tb_clientes set nome=?, rg=?, cpf=?, email=?, telefone=?, celular=?, cep=?,"
-                    + "endereco=?, numero?, complemento?, bairro?, cidade?, estado? where id =?";
+                    + "endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id =?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getNome());
@@ -109,10 +109,9 @@ public class ClientesDAO {
         try {
 
             String sql = "delete from tb_clientes where id = ?";
-
-            PreparedStatement stmt = con.prepareStatement(sql);
             
-                stmt.setInt(1, obj.getId());
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, obj.getId());
 
             // 3 passo executar o comando sql]
             stmt.execute();
