@@ -22,6 +22,7 @@ public class ClientesDAO {
     // Metodo cadastrarCliente
 
     private Connection con;
+    private Clientes obj;
 
     public ClientesDAO(Connection con) {
         this.con = con;
@@ -109,7 +110,7 @@ public class ClientesDAO {
         try {
 
             String sql = "delete from tb_clientes where id = ?";
-            
+
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, obj.getId());
 
@@ -136,6 +137,87 @@ public class ClientesDAO {
             // Comando SQL
             String sql = "select * from tb_clientes";
             PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Clientes obj = new Clientes();
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("Telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("Endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("estado"));
+
+                lista.add(obj);
+
+            }
+
+            return lista;
+
+        } catch (SQLException erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
+            return null;
+        }
+    }
+
+    // MetodoConsultar Cliente por nome
+    public Clientes consultarPorNome(String nome) {
+        try {
+            // Comando SQL
+            String sql = "select * from tb_clientes where nome = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            Clientes obj = new Clientes();
+            if (rs.next()) {
+               
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("Telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("Endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("estado"));
+
+            }
+            return obj;
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            return null;
+        }
+    }
+
+    //Metodo filtrar Cliente na barra de busca
+    public List<Clientes> buscaClientesPorNome(String nome) {
+
+        try {
+            //Cliando Lista
+            List<Clientes> lista = new ArrayList<>();
+
+            // Comando SQL
+            String sql = "select * from tb_clientes where nome like ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
