@@ -6,6 +6,7 @@ package br.com.projeto.dao;
 
 import br.com.projeto.jbdc.ConnectionFactory;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.WebServiceCep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -247,6 +248,28 @@ public class ClientesDAO {
         } catch (SQLException erro) {
 
             JOptionPane.showMessageDialog(null, "Erro:" + erro);
+            return null;
+        }
+    }
+    
+    // Buscar cep
+    
+    public Clientes buscaCep(String cep) {
+       
+        WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
+       
+
+        Clientes obj = new Clientes();
+
+        if (webServiceCep.wasSuccessful()) {
+            obj.setEndereco(webServiceCep.getLogradouroFull());
+            obj.setCidade(webServiceCep.getCidade());
+            obj.setBairro(webServiceCep.getBairro());
+            obj.setUf(webServiceCep.getUf());
+            return obj;
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro numero: " + webServiceCep.getResulCode());
+            JOptionPane.showMessageDialog(null, "Descrição do erro: " + webServiceCep.getResultText());
             return null;
         }
     }
