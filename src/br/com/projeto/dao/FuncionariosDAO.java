@@ -4,53 +4,55 @@
  */
 package br.com.projeto.dao;
 
+import java.sql.Connection;
 import br.com.projeto.jbdc.ConnectionFactory;
 import br.com.projeto.model.Clientes;
+import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.WebServiceCep;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
 
 /**
  *
  * @author User
  */
-public class ClientesDAO {
-    // Metodo cadastrarCliente
+public class FuncionariosDAO {
 
-    private Connection con;  
-    public ClientesDAO(Connection con) {
-        this.con = con;
+    private Connection con;
+    
+    public FuncionariosDAO(){
+        this.con = new ConnectionFactory().getConnection();
     }
-
-    public ClientesDAO() {
-        this.con = (Connection) new ConnectionFactory().getConnection();
-    }
-
-    public void cadastrarCliente(Clientes obj) {
+    
+    //Metodo cadastrar os Funcionário
+    
+    public void cadastrarFuncionarios(Funcionarios obj) {
         try {
 
-            String sql = "insert into tb_clientes (nome, rg, cpf, email, telefone, celular, cep,endereco, numero, complemento, bairro, cidade, estado)"
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into tb_funcionarios (nome, rg, cpf, email, senha, cargo, nivel_acesso, telefone, celular, cep,endereco, numero, complemento, bairro, cidade, estado)"
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, obj.getNome());
                 stmt.setString(2, obj.getRg());
                 stmt.setString(3, obj.getCpf());
                 stmt.setString(4, obj.getEmail());
-                stmt.setString(5, obj.getTelefone());
-                stmt.setString(6, obj.getCelular());
-                stmt.setString(7, obj.getCep());
-                stmt.setString(8, obj.getEndereco());
-                stmt.setInt(9, obj.getNumero());
-                stmt.setString(10, obj.getComplemento());
-                stmt.setString(11, obj.getBairro());
-                stmt.setString(12, obj.getCidade());
-                stmt.setString(13, obj.getUf());
+                stmt.setString(5, obj.getSenha());
+                stmt.setString(6, obj.getCargo());
+                stmt.setString(7, obj.getNivel_acesso());
+                stmt.setString(8, obj.getTelefone());
+                stmt.setString(9, obj.getCelular());
+                stmt.setString(10, obj.getCep());
+                stmt.setString(11, obj.getEndereco());
+                stmt.setInt(12, obj.getNumero());
+                stmt.setString(13, obj.getComplemento());
+                stmt.setString(14, obj.getBairro());
+                stmt.setString(15, obj.getCidade());
+                stmt.setString(16, obj.getUf());
 
                 // 3 passo executar o comando sql]
                 stmt.execute();
@@ -65,50 +67,12 @@ public class ClientesDAO {
         }
 
     }
-
-    // Metodo alterarCliente
-    public void alterarCliente(Clientes obj) {
-        try {
-
-            String sql = "update tb_clientes set nome=?, rg=?, cpf=?, email=?, telefone=?, celular=?, cep=?,"
-                    + "endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id =?";
-
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getRg());
-            stmt.setString(3, obj.getCpf());
-            stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
-            stmt.setString(7, obj.getCep());
-            stmt.setString(8, obj.getEndereco());
-            stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
-            stmt.setString(13, obj.getUf());
-
-            stmt.setInt(14, obj.getId());
-
-            // 3 passo executar o comando sql]
-            stmt.execute();
-            stmt.close();
-
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro:" + erro);
-
-        }
-
-    }
-    // Metodo deletarCliente
-
-    public void deletarCliente(Clientes obj) {
+    
+    public void deletarFuncionarios(Funcionarios obj) {
 
         try {
 
-            String sql = "delete from tb_clientes where id = ?";
+            String sql = "delete from tb_funcionarios where id = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, obj.getId());
@@ -125,27 +89,31 @@ public class ClientesDAO {
         }
 
     }
-
-    // Metodo de Listar Todos os Clientes
-    public List<Clientes> listarClientes() {
+    
+    
+    // Metodo Listar Funcionarios
+    public List<Funcionarios> listarFuncionarios() {
 
         try {
             //Cliando Lista
-            List<Clientes> lista = new ArrayList<>();
+            List<Funcionarios> lista = new ArrayList<>();
 
             // Comando SQL
-            String sql = "select * from tb_clientes";
+            String sql = "select * from tb_funcionarios";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Clientes obj = new Clientes();
+                Funcionarios obj = new Funcionarios();
 
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
                 obj.setRg(rs.getString("rg"));
                 obj.setCpf(rs.getString("cpf"));
                 obj.setEmail(rs.getString("email"));
+                obj.setSenha(rs.getString("senha"));
+                obj.setCargo(rs.getString("cargo"));
+                obj.setNivel_acesso(rs.getString("nivel_acesso"));                
                 obj.setTelefone(rs.getString("Telefone"));
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
@@ -168,16 +136,56 @@ public class ClientesDAO {
             return null;
         }
     }
+    
+     // Metodo alterarCliente
+    public void alterarFuncionarios(Funcionarios obj) {
+        try {
 
+            String sql = "update tb_funcionarios set nome=?, rg=?, cpf=?, email=?, senha=?, cargo=?, nivel_acesso=?, telefone=?, celular=?, cep=?,"
+                    + "endereco=?, numero=?, complemento=?, bairro=?, cidade=?, estado=? where id =?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, obj.getNome());
+            stmt.setString(2, obj.getRg());
+            stmt.setString(3, obj.getCpf());
+            stmt.setString(4, obj.getEmail());
+            stmt.setString(5, obj.getSenha());
+            stmt.setString(6, obj.getCargo());
+            stmt.setString(7, obj.getNivel_acesso());           
+            stmt.setString(8, obj.getTelefone());
+            stmt.setString(9, obj.getCelular());
+            stmt.setString(10, obj.getCep());
+            stmt.setString(11, obj.getEndereco());
+            stmt.setInt(12, obj.getNumero());
+            stmt.setString(13, obj.getComplemento());
+            stmt.setString(14, obj.getBairro());
+            stmt.setString(15, obj.getCidade());
+            stmt.setString(16, obj.getUf());
+
+            stmt.setInt(14, obj.getId());
+
+            // 3 passo executar o comando sql]
+            stmt.execute();
+            stmt.close();
+
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
+
+        }
+
+    }
+    
     // MetodoConsultar Cliente por nome
-    public Clientes consultarPorNome(String nome) {
+    public Funcionarios consultarPorNome(String nome) {
         try {
             // Comando SQL
-            String sql = "select * from tb_clientes where nome = ?";
+            String sql = "select * from tb_funcionarios where nome = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
             ResultSet rs = stmt.executeQuery();
-            Clientes obj = new Clientes();
+            Funcionarios obj = new Funcionarios();
             if (rs.next()) {
                
 
@@ -186,6 +194,9 @@ public class ClientesDAO {
                 obj.setRg(rs.getString("rg"));
                 obj.setCpf(rs.getString("cpf"));
                 obj.setEmail(rs.getString("email"));
+                obj.setSenha(rs.getString("senha"));
+                obj.setCargo(rs.getString("cargo"));
+                obj.setNivel_acesso(rs.getString("nivel_acesso"));              
                 obj.setTelefone(rs.getString("Telefone"));
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
@@ -207,26 +218,29 @@ public class ClientesDAO {
     }
 
     //Metodo filtrar Cliente na barra de busca
-    public List<Clientes> buscaClientesPorNome(String nome) {
+    public List<Funcionarios> buscaFuncionariosPorNome(String nome) {
 
         try {
             //Cliando Lista
-            List<Clientes> lista = new ArrayList<>();
+            List<Funcionarios> lista = new ArrayList<>();
 
             // Comando SQL
-            String sql = "select * from tb_clientes where nome like ?";
+            String sql = "select * from tb_funcionarios where nome like ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, nome);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Clientes obj = new Clientes();
+                Funcionarios obj = new Funcionarios();
 
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
                 obj.setRg(rs.getString("rg"));
                 obj.setCpf(rs.getString("cpf"));
                 obj.setEmail(rs.getString("email"));
+                obj.setSenha(rs.getString("senha"));
+                obj.setCargo(rs.getString("cargo"));
+                obj.setNivel_acesso(rs.getString("nivel_acesso")); 
                 obj.setTelefone(rs.getString("Telefone"));
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
@@ -250,14 +264,12 @@ public class ClientesDAO {
         }
     }
     
-    // Buscar cep
-    
-    public Clientes buscaCep(String cep) {
+    public Funcionarios buscaCep(String cep) {
        
         WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
        
 
-        Clientes obj = new Clientes();
+        Funcionarios obj = new Funcionarios();
 
         if (webServiceCep.wasSuccessful()) {
             obj.setEndereco(webServiceCep.getLogradouroFull());
@@ -273,3 +285,6 @@ public class ClientesDAO {
     }
 
 }
+  
+
+
