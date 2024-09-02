@@ -9,6 +9,7 @@ import br.com.projeto.jbdc.ConnectionFactory;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.WebServiceCep;
+import br.com.projeto.view.Frmmenu;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,13 +24,12 @@ import javax.swing.JOptionPane;
 public class FuncionariosDAO {
 
     private Connection con;
-    
-    public FuncionariosDAO(){
+
+    public FuncionariosDAO() {
         this.con = new ConnectionFactory().getConnection();
     }
-    
+
     //Metodo cadastrar os Funcionário
-    
     public void cadastrarFuncionarios(Funcionarios obj) {
         try {
 
@@ -67,7 +67,7 @@ public class FuncionariosDAO {
         }
 
     }
-    
+
     public void deletarFuncionarios(Funcionarios obj) {
 
         try {
@@ -89,8 +89,7 @@ public class FuncionariosDAO {
         }
 
     }
-    
-    
+
     // Metodo Listar Funcionarios
     public List<Funcionarios> listarFuncionarios() {
 
@@ -113,7 +112,7 @@ public class FuncionariosDAO {
                 obj.setEmail(rs.getString("email"));
                 obj.setSenha(rs.getString("senha"));
                 obj.setCargo(rs.getString("cargo"));
-                obj.setNivel_acesso(rs.getString("nivel_acesso"));                
+                obj.setNivel_acesso(rs.getString("nivel_acesso"));
                 obj.setTelefone(rs.getString("Telefone"));
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
@@ -136,8 +135,8 @@ public class FuncionariosDAO {
             return null;
         }
     }
-    
-     // Metodo alterarCliente
+
+    // Metodo alterarCliente
     public void alterarFuncionarios(Funcionarios obj) {
         try {
 
@@ -151,7 +150,7 @@ public class FuncionariosDAO {
             stmt.setString(4, obj.getEmail());
             stmt.setString(5, obj.getSenha());
             stmt.setString(6, obj.getCargo());
-            stmt.setString(7, obj.getNivel_acesso());           
+            stmt.setString(7, obj.getNivel_acesso());
             stmt.setString(8, obj.getTelefone());
             stmt.setString(9, obj.getCelular());
             stmt.setString(10, obj.getCep());
@@ -176,7 +175,7 @@ public class FuncionariosDAO {
         }
 
     }
-    
+
     // MetodoConsultar Cliente por nome
     public Funcionarios consultarPorNome(String nome) {
         try {
@@ -187,7 +186,6 @@ public class FuncionariosDAO {
             ResultSet rs = stmt.executeQuery();
             Funcionarios obj = new Funcionarios();
             if (rs.next()) {
-               
 
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
@@ -196,7 +194,7 @@ public class FuncionariosDAO {
                 obj.setEmail(rs.getString("email"));
                 obj.setSenha(rs.getString("senha"));
                 obj.setCargo(rs.getString("cargo"));
-                obj.setNivel_acesso(rs.getString("nivel_acesso"));              
+                obj.setNivel_acesso(rs.getString("nivel_acesso"));
                 obj.setTelefone(rs.getString("Telefone"));
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
@@ -209,7 +207,6 @@ public class FuncionariosDAO {
 
             }
             return obj;
-
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
@@ -240,7 +237,7 @@ public class FuncionariosDAO {
                 obj.setEmail(rs.getString("email"));
                 obj.setSenha(rs.getString("senha"));
                 obj.setCargo(rs.getString("cargo"));
-                obj.setNivel_acesso(rs.getString("nivel_acesso")); 
+                obj.setNivel_acesso(rs.getString("nivel_acesso"));
                 obj.setTelefone(rs.getString("Telefone"));
                 obj.setCelular(rs.getString("celular"));
                 obj.setCep(rs.getString("cep"));
@@ -263,11 +260,10 @@ public class FuncionariosDAO {
             return null;
         }
     }
-    
+
     public Funcionarios buscaCep(String cep) {
-       
+
         WebServiceCep webServiceCep = WebServiceCep.searchCep(cep);
-       
 
         Funcionarios obj = new Funcionarios();
 
@@ -284,7 +280,31 @@ public class FuncionariosDAO {
         }
     }
 
+    //Metodo efetuar login
+    public void Login(String email, String senha) {
+        try {
+
+            String sql = "select * from tb_funcionarios where email=? and senha=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if(rs.next()){
+                //Usuario logado com sucesso
+                JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
+                Frmmenu tela = new Frmmenu();
+                tela.setVisible(true);
+            }else{
+                //Dados incorretos
+                JOptionPane.showMessageDialog(null, "Dados incorretos!");
+                
+            }
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
+        }
+
+    }
 }
-  
-
-
