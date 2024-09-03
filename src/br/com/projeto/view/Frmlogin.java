@@ -73,7 +73,6 @@ public class Frmlogin extends javax.swing.JFrame {
         jLabel18.setText("Senha:");
 
         txtsenhal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtsenhal.setText("jPasswordField1");
 
         txtsair.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtsair.setText("Sair");

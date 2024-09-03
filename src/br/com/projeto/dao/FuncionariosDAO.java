@@ -295,6 +295,7 @@ public class FuncionariosDAO {
                 //Usuario logado com sucesso
                 JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
                 Frmmenu tela = new Frmmenu();
+                tela.usuariologado = rs.getString("nome");
                 tela.setVisible(true);
             }else{
                 //Dados incorretos
