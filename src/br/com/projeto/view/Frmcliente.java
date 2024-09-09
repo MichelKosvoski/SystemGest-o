@@ -436,6 +436,11 @@ public class Frmcliente extends javax.swing.JFrame {
         jLabel115.setText("Nome:");
 
         txtpesquisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpesquisaActionPerformed(evt);
+            }
+        });
 
         btnpesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnpesquisar.setText("Pesquisar");
@@ -753,6 +758,10 @@ public class Frmcliente extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtcepKeyPressed
+
+    private void txtpesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpesquisaActionPerformed
 
     /**
      * @param args the command line arguments
