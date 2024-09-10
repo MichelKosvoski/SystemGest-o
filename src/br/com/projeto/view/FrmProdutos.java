@@ -4,7 +4,9 @@
  */
 package br.com.projeto.view;
 
+import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.FornecedoresDAO;
+import br.com.projeto.model.Clientes;
 import br.com.projeto.model.Fornecedores;
 import br.com.projeto.model.Utilitarios;
 import java.awt.Color;
@@ -73,13 +75,13 @@ public class FrmProdutos extends javax.swing.JFrame {
         txtpreco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        cbfornecedor = new javax.swing.JComboBox<>();
+        cbfornecedor = new javax.swing.JComboBox();
         btnsalvar = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         btndeletar = new javax.swing.JButton();
         btnalterar = new javax.swing.JButton();
         btnbuscar = new javax.swing.JButton();
-        txtqtdestoque = new javax.swing.JTextField();
+        txtqtd_estoque = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel115 = new javax.swing.JLabel();
         txtpesquisa = new javax.swing.JTextField();
@@ -102,7 +104,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro de Produtos");
+        jLabel2.setText("Cadastro de clientes");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,10 +142,10 @@ public class FrmProdutos extends javax.swing.JFrame {
         txtpreco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Qtd. Estoque:");
+        jLabel5.setText("Qtd.Estoque:");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setText("Fornecedores:");
+        jLabel13.setText("Fornecedor:");
 
         cbfornecedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cbfornecedor.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -201,7 +203,7 @@ public class FrmProdutos extends javax.swing.JFrame {
             }
         });
 
-        txtqtdestoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtqtd_estoque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout PainelDadosLayout = new javax.swing.GroupLayout(PainelDados);
         PainelDados.setLayout(PainelDadosLayout);
@@ -218,34 +220,35 @@ public class FrmProdutos extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PainelDadosLayout.createSequentialGroup()
-                                .addGap(200, 200, 200)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addGap(1, 1, 1)
+                                .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtqtd_estoque, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PainelDadosLayout.createSequentialGroup()
+                                .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelDadosLayout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbfornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelDadosLayout.createSequentialGroup()
+                                        .addGap(200, 200, 200)
+                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnalterar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btndeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelDadosLayout.createSequentialGroup()
-                                    .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbfornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(PainelDadosLayout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtqtdestoque, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btndeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(PainelDadosLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnbuscar)))
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
         PainelDadosLayout.setVerticalGroup(
             PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,27 +257,26 @@ public class FrmProdutos extends javax.swing.JFrame {
                 .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnbuscar))
-                .addGap(20, 20, 20)
                 .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelDadosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnbuscar))
+                        .addGap(20, 20, 20)
                         .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtqtd_estoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(cbfornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PainelDadosLayout.createSequentialGroup()
-                        .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtqtdestoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                        .addContainerGap(337, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelDadosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PainelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnsalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +285,7 @@ public class FrmProdutos extends javax.swing.JFrame {
                         .addGap(33, 33, 33))))
         );
 
-        jTabbedPane1.addTab("Dados de Produtos", PainelDados);
+        jTabbedPane1.addTab("Dados do Produto", PainelDados);
 
         jLabel115.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel115.setText("Nome:");
@@ -309,7 +311,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Descrição", "Preço", "Fornecedores"
+                "Código", "Nome", "RG", "CPF", "Fornecedor"
             }
         ));
         tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -365,7 +367,7 @@ public class FrmProdutos extends javax.swing.JFrame {
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 340, Short.MAX_VALUE))
+                        .addGap(0, 328, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -384,7 +386,7 @@ public class FrmProdutos extends javax.swing.JFrame {
                     .addComponent(btnpesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,14 +397,17 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButton3, jButton4, jButton5});
 
-        jTabbedPane1.addTab("Consultar Produtos", jPanel4);
+        jTabbedPane1.addTab("Consultar de Produtos", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -593,13 +598,13 @@ public class FrmProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtpesquisaActionPerformed
 
     private void cbfornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbfornecedorAncestorAdded
+
         FornecedoresDAO dao = new FornecedoresDAO();
-        List<Fornecedores>listadefornecedores = dao.listarFornecedores();
-        
+        List<Fornecedores> listadeFornecedores = dao.listarFornecedores();
         cbfornecedor.removeAll();
-        for(Fornecedores f : listadefornecedores){
+        for (Fornecedores f : listadeFornecedores) {
             cbfornecedor.addItem(f);
-            
+
         }
     }//GEN-LAST:event_cbfornecedorAncestorAdded
 
@@ -637,7 +642,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     private javax.swing.JButton btndeletar;
     private javax.swing.JButton btnpesquisar;
     private javax.swing.JButton btnsalvar;
-    private javax.swing.JComboBox<String> cbfornecedor;
+    private javax.swing.JComboBox cbfornecedor;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -659,7 +664,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     private javax.swing.JTextField txtdescricao;
     private javax.swing.JTextField txtpesquisa;
     private javax.swing.JTextField txtpreco;
-    private javax.swing.JTextField txtqtdestoque;
+    private javax.swing.JTextField txtqtd_estoque;
     // End of variables declaration//GEN-END:variables
 
     private static class DefaultTable {

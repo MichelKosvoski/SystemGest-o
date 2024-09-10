@@ -25,7 +25,7 @@ public class Frmfuncionarios extends javax.swing.JFrame {
 
         FuncionariosDAO dao = new FuncionariosDAO();
         List<Funcionarios> lista = dao.listarFuncionarios();
-        DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
+        DefaultTableModel dados = (DefaultTableModel) tabelaFuncionarios.getModel();
         dados.setNumRows(0);
 
         for (Funcionarios c : lista) {
@@ -113,7 +113,7 @@ public class Frmfuncionarios extends javax.swing.JFrame {
         txtpesquisa = new javax.swing.JTextField();
         btnpesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProdutos = new javax.swing.JTable();
+        tabelaFuncionarios = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -501,8 +501,8 @@ public class Frmfuncionarios extends javax.swing.JFrame {
             }
         });
 
-        tabelaProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaFuncionarios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tabelaFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -510,12 +510,12 @@ public class Frmfuncionarios extends javax.swing.JFrame {
                 "Código", "Nome", "RG", "CPF", "E-mail", "Senha", "Cargo", "Nível Acesso", "Telefone", "Celular", "Cep", "Endereço", "N°", "Comp", "Bairro", "Cidade", "UF"
             }
         ));
-        tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaProdutosMouseClicked(evt);
+                tabelaFuncionariosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaProdutos);
+        jScrollPane1.setViewportView(tabelaFuncionarios);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Novo");
@@ -717,30 +717,30 @@ public class Frmfuncionarios extends javax.swing.JFrame {
         listar();
     }//GEN-LAST:event_formWindowActivated
 
-    private void tabelaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutosMouseClicked
+    private void tabelaFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFuncionariosMouseClicked
         // Pegar os dados
         jTabbedPane1.setSelectedIndex(0);
 
-        txtcodigo.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 0).toString());
-        txtnome.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 1).toString());
-        txtrg.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 2).toString());
-        txtcpf.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 3).toString());
-        txtemail.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 4).toString());
-        txtsenha.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 5).toString());
-        txtcargo.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 6).toString());
-        cbnivel_acesso.setSelectedItem(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 7).toString());
-        txttelefone.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 8).toString());
-        txtcelular.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 9).toString());
-        txtcep.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 10).toString());
-        txtendereco.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 11).toString());
-        txtnumero.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 12).toString());
-        txtcomplemento.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 13).toString());
-        txtbairro.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 14).toString());
-        txtcidade.setText(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 15).toString());
-        cbuf.setSelectedItem(tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow(), 16).toString());
+        txtcodigo.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 0).toString());
+        txtnome.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 1).toString());
+        txtrg.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 2).toString());
+        txtcpf.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 3).toString());
+        txtemail.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 4).toString());
+        txtsenha.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 5).toString());
+        txtcargo.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 6).toString());
+        cbnivel_acesso.setSelectedItem(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 7).toString());
+        txttelefone.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 8).toString());
+        txtcelular.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 9).toString());
+        txtcep.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 10).toString());
+        txtendereco.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 11).toString());
+        txtnumero.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 12).toString());
+        txtcomplemento.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 13).toString());
+        txtbairro.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 14).toString());
+        txtcidade.setText(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 15).toString());
+        cbuf.setSelectedItem(tabelaFuncionarios.getValueAt(tabelaFuncionarios.getSelectedRow(), 16).toString());
 
 
-    }//GEN-LAST:event_tabelaProdutosMouseClicked
+    }//GEN-LAST:event_tabelaFuncionariosMouseClicked
 
     private void btnpesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisarActionPerformed
         // Botão pesquisar
@@ -748,7 +748,7 @@ public class Frmfuncionarios extends javax.swing.JFrame {
 
         FuncionariosDAO dao = new FuncionariosDAO();
         List<Funcionarios> lista = dao.buscaFuncionariosPorNome(nome);
-        DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
+        DefaultTableModel dados = (DefaultTableModel) tabelaFuncionarios.getModel();
         dados.setNumRows(0);
 
         for (Funcionarios c : lista) {
@@ -906,7 +906,7 @@ public class Frmfuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tabelaProdutos;
+    private javax.swing.JTable tabelaFuncionarios;
     private javax.swing.JTextField txtbairro;
     private javax.swing.JTextField txtcargo;
     private javax.swing.JFormattedTextField txtcelular;

@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class FornecedoresDAO {
     
-     private Connection con;
+    private Connection con;
 
     public FornecedoresDAO() {
         this.con = new ConnectionFactory().getConnection();

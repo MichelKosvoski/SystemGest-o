@@ -8,7 +8,7 @@ package br.com.projeto.model;
  *
  * @author User
  */
-public class Produto {
+public class Produtos {
     
     private  int id;
     private String descricao;
@@ -16,8 +16,6 @@ public class Produto {
     private int qtd_estoque;
     
     private Fornecedores fornecedor;
-    
-    
 
     public int getId() {
         return id;
@@ -60,7 +58,17 @@ public class Produto {
     }
     
     
+
+    
     
     
 
+    
+    
+    
+    
+    
+    
+
+   
 }
