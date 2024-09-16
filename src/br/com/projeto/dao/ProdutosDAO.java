@@ -32,7 +32,7 @@ public class ProdutosDAO {
     public void cadastrar(Produtos obj) {
         try {
 
-            String sql = "insert intro tb_produtos(descricao, preco, qtd_estoque, for_id)values()";
+            String sql = "insert into tb_produtos(descricao, preco, qtd_estoque, for_id)values(?,?,?,?)";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, obj.getDescricao());
@@ -59,7 +59,7 @@ public class ProdutosDAO {
             List<Produtos> lista = new ArrayList<>();
 
             String sql = "Select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p "
-                    + "inner join tb_fornecedores as f on(p.for_id=f.id)";
+                       + "inner join tb_fornecedores as f on(p.for_id = f.id)";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
