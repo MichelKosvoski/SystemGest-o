@@ -19,7 +19,6 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-
 public class ProdutosDAO {
 
     private Connection con;
@@ -56,19 +55,19 @@ public class ProdutosDAO {
     public List<Produtos> listarProdutos() {
         try {
 
-            List<Produtos> lista = new ArrayList<>();
+            List<Produtos> listar = new ArrayList<>();
 
-            String sql = "Select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p "
+            String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p "
                        + "inner join tb_fornecedores as f on(p.for_id = f.id)";
+
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Produtos obj = new Produtos();
                 Fornecedores f = new Fornecedores();
-
                 obj.setId(rs.getInt("p.id"));
-                obj.setDescricao(rs.getString("p.descicao"));
+                obj.setDescricao(rs.getString("p.descricao"));
                 obj.setPreco(rs.getDouble("p.preco"));
                 obj.setQtd_estoque(rs.getInt("p.qtd_estoque"));
 
@@ -76,42 +75,41 @@ public class ProdutosDAO {
 
                 obj.setFornecedor(f);
 
-                lista.add(obj);
+                listar.add(obj);
             }
-            return lista;
+            return listar;
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro:" + erro);
-        
-        return null;       
-    }
-}
 
-    public void alterarProdutos(Produtos obj){
+            return null;
+        }
+    }
+
+    public void alterarProdutos(Produtos obj) {
         try {
             String sql = "update tb_fornecedores set descricao=?, preco=?, qtd_estoque=?, for_id=? where id=?";
-            
+
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getDescricao());
             stmt.setDouble(2, obj.getPreco());
-            stmt.setInt(3, obj.getQtd_estoque());          
+            stmt.setInt(3, obj.getQtd_estoque());
             stmt.setInt(4, obj.getFornecedor().getId());
             stmt.setInt(5, obj.getId());
-            
+
             stmt.execute();
             stmt.close();
-        
-            
+
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
-            
-        } catch (Exception erro){
-            
-            JOptionPane.showMessageDialog(null,"Erro:" + erro);
-                   
-       }        
+
+        } catch (Exception erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
+
+        }
     }
-    
-     public void deletarProdutos(Produtos obj) {
+
+    public void deletarProdutos(Produtos obj) {
 
         try {
 
@@ -133,9 +131,4 @@ public class ProdutosDAO {
 
     }
 
-
 }
-
-
-            
- 

@@ -10,7 +10,7 @@ package br.com.projeto.model;
  */
 public class Produtos {
     
-    private  int id;
+    private  int  id;
     private String descricao;
     private double  preco;
     private int qtd_estoque;

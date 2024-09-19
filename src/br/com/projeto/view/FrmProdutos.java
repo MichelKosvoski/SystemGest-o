@@ -4,7 +4,6 @@
  */
 package br.com.projeto.view;
 
-import br.com.projeto.dao.ClientesDAO;
 import br.com.projeto.dao.FornecedoresDAO;
 import br.com.projeto.dao.ProdutosDAO;
 import br.com.projeto.model.Fornecedores;
@@ -25,11 +24,11 @@ public class FrmProdutos extends javax.swing.JFrame {
     public void listar() {
 
         ProdutosDAO dao = new ProdutosDAO();
-        List<Produtos> lista = dao.listarProdutos();
+        List<Produtos> listar = dao.listarProdutos();
         DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
         dados.setNumRows(0);
 
-         for (Produtos c : lista) {
+         for (Produtos c : listar) {
             dados.addRow(new Object[]{
                 c.getId(),
                 c.getDescricao(),
