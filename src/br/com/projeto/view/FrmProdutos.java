@@ -21,14 +21,14 @@ import javax.swing.table.DefaultTableModel;
 public class FrmProdutos extends javax.swing.JFrame {
 
     // Metodo Listar
-    public void listar() {
+    public void listarProdutos() {
 
         ProdutosDAO dao = new ProdutosDAO();
-        List<Produtos> listar = dao.listarProdutos();
+        List<Produtos> lista = dao.listarProdutos();
         DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
         dados.setNumRows(0);
 
-         for (Produtos c : listar) {
+         for (Produtos c : lista) {
             dados.addRow(new Object[]{
                 c.getId(),
                 c.getDescricao(),
@@ -425,7 +425,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // Carrega Lista
-        listar();
+        listarProdutos();
     }//GEN-LAST:event_formWindowActivated
 
     private void tabelaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaProdutosMouseClicked

@@ -53,35 +53,38 @@ public class ProdutosDAO {
     }
 
     public List<Produtos> listarProdutos() {
+
         try {
+            //Cliando Lista
+            List<Produtos> lista = new ArrayList<>();
 
-            List<Produtos> listar = new ArrayList<>();
-
+            // Comando SQL
             String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p "
-                       + "inner join tb_fornecedores as f on(p.for_id = f.id)";
-
+                       + "inner join tb_fornecedores as f  on(p.for_id = f.id)";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Produtos obj = new Produtos();
                 Fornecedores f = new Fornecedores();
+
                 obj.setId(rs.getInt("p.id"));
-                obj.setDescricao(rs.getString("p.descricao"));
+                obj.setDescricao(rs.getString("descricao"));
                 obj.setPreco(rs.getDouble("p.preco"));
                 obj.setQtd_estoque(rs.getInt("p.qtd_estoque"));
-
+                
                 f.setNome(rs.getString("f.nome"));
-
                 obj.setFornecedor(f);
+                
+                lista.add(obj);
 
-                listar.add(obj);
             }
-            return listar;
+
+            return lista;
 
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro:" + erro);
 
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
             return null;
         }
     }
