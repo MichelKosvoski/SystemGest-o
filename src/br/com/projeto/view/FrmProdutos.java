@@ -451,27 +451,18 @@ public class FrmProdutos extends javax.swing.JFrame {
         // Botão pesquisar
         String nome = "%" + txtpesquisa.getText() + "%";
 
-        ClientesDAO dao = new ClientesDAO();
-        List<Clientes> lista = dao.buscaClientesPorNome(nome);
+        ProdutosDAO dao = new ProdutosDAO();
+        List<Produtos> lista = dao.buscarProdutosPorNome(nome);
         DefaultTableModel dados = (DefaultTableModel) tabelaProdutos.getModel();
         dados.setNumRows(0);
 
-        for (Clientes c : lista) {
+        for (Produtos c : lista) {
             dados.addRow(new Object[]{
                 c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelefone(),
-                c.getCelular(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getComplemento(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getUf()
+                c.getDescricao(),
+                c.getPreco(),
+                c.getQtd_estoque(),
+                c.getFornecedor().getNome(),
             });
         }
 
@@ -487,27 +478,28 @@ public class FrmProdutos extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String nome = txtdescricao.getText();
-        Clientes obj = new Clientes();
-        ClientesDAO dao = new ClientesDAO();
+        Produtos obj = new Produtos();
+        ProdutosDAO dao = new ProdutosDAO();
 
-        obj = dao.consultarPorNome(nome);
+        obj = (Produtos) dao.consultaPorNome(nome);
+        
+        cbfornecedor.removeAllItems();
 
-        if (obj.getNome() != null) {
+        if (obj.getDescricao()!= null) {
 
             txtcodigo.setText(String.valueOf(obj.getId()));
-            txtdescricao.setText(obj.getNome());
-            txtrg.setText(obj.getRg());
-            txtcpf.setText(obj.getCpf());
-            txtpreco.setText(obj.getEmail());
-            txttelefone.setText(obj.getTelefone());
-            txtcelular.setText(obj.getCelular());
-            txtcep.setText(obj.getCep());
-            txtendereco.setText(obj.getEndereco());
-            txtnumero.setText(String.valueOf(obj.getNumero()));
-            txtcomplemento.setText(obj.getComplemento());
-            txtbairro.setText(obj.getBairro());
-            txtcidade.setText(obj.getCidade());
-            cbfornecedor.setSelectedItem(obj.getUf());
+            txtdescricao.setText(obj.getDescricao());
+            txtpreco.setText(String.valueOf(obj.getPreco()));
+            txtqtd_estoque.setText(String.valueOf(obj.getQtd_estoque()));
+            
+            Fornecedores f = new Fornecedores();
+            FornecedoresDAO fdao = new FornecedoresDAO();
+            
+            f = fdao.consultarPorNome(obj.getFornecedor().getNome());
+            
+            cbfornecedor.getModel().setSelectedItem(f);
+            
+           
         } else {
             JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
         }

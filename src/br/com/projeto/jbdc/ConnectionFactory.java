@@ -17,10 +17,10 @@ public class ConnectionFactory {
         
         try {
             
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/dbvendas?user=postgres&password=root");
+            return DriverManager.getConnection("jdbc:mysql://127.0.0.1/bdvendas","root","Minhasenha1384$");
             
         } catch (Exception erro) {
-            throw new RuntimeException(erro);
+            throw new RuntimeException("erro" + erro);
         }
     }
 }
