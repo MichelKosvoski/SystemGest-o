@@ -190,7 +190,7 @@ public class ProdutosDAO {
                 Fornecedores f = new Fornecedores();
 
                 obj.setId(rs.getInt("p.id"));
-                obj.setDescricao(rs.getString("descricao"));
+                obj.setDescricao(rs.getString("p.descricao"));
                 obj.setPreco(rs.getDouble("p.preco"));
                 obj.setQtd_estoque(rs.getInt("p.qtd_estoque"));
 
@@ -202,6 +202,39 @@ public class ProdutosDAO {
             }
 
             return lista;
+
+        } catch (SQLException erro) {
+
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
+            return null;
+        }
+    }
+
+    public Produtos buscaPorCodigo(int id) {
+
+        try {
+            //Cliando Lista
+            List<Produtos> lista = new ArrayList<>();
+
+            // Comando SQL
+            String sql = "select * from tb_produtos where id = ? ";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            Produtos obj = new Produtos();
+
+            if (rs.next()){
+                
+                obj.setId(rs.getInt("id"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPreco(rs.getDouble("preco"));
+                obj.setQtd_estoque(rs.getInt("qtd_estoque"));
+
+            }
+
+            return obj;
 
         } catch (SQLException erro) {
 
