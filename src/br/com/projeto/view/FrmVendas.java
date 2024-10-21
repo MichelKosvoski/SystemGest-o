@@ -5,18 +5,13 @@
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ClientesDAO;
-import br.com.projeto.dao.FornecedoresDAO;
 import br.com.projeto.dao.ProdutosDAO;
 import br.com.projeto.model.Clientes;
-import br.com.projeto.model.Fornecedores;
 import br.com.projeto.model.Produtos;
-import br.com.projeto.model.Utilitarios;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class FrmVendas extends javax.swing.JFrame {
-
+    Clientes obj = new Clientes();
     double total, preco, subtotal;
     int qtd;
 
@@ -130,6 +125,11 @@ public class FrmVendas extends javax.swing.JFrame {
 
         txtdata.setEditable(false);
         txtdata.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtdata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdataActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Data da Venda:");
@@ -477,6 +477,8 @@ public class FrmVendas extends javax.swing.JFrame {
         // Tala pagamentos
         FrmPagamentos telap = new FrmPagamentos();
         telap.txttotal.setText(String.valueOf(total));
+        telap.clientes =obj;
+        telap.carrinho = carrinho;
         telap.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnpagamentoActionPerformed
@@ -522,7 +524,7 @@ public class FrmVendas extends javax.swing.JFrame {
     private void txtcpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcpfKeyPressed
         // Busca por cpf
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Clientes obj = new Clientes();
+         
             ClientesDAO dao = new ClientesDAO();
 
             obj = dao.buscaPorCpf(txtcpf.getText());
@@ -547,6 +549,10 @@ public class FrmVendas extends javax.swing.JFrame {
             txtpreco.setText(String.valueOf(obj.getPreco()));
         }
     }//GEN-LAST:event_txtcodigoKeyPressed
+
+    private void txtdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdataActionPerformed
 
     /**
      * @param args the command line arguments
