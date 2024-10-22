@@ -42,8 +42,6 @@ public class VendasDAO {
                 stmt.close();
             }
 
-            JOptionPane.showMessageDialog(null, "Venda Registrada com Sucesso!");
-
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro:" + erro);
         }
@@ -72,4 +70,8 @@ public class VendasDAO {
             throw new RuntimeException(e);
         }
         }
+
+    public int retornaUltimaVenda() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

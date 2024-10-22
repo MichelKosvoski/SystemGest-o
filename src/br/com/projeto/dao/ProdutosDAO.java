@@ -225,8 +225,8 @@ public class ProdutosDAO {
 
             Produtos obj = new Produtos();
 
-            if (rs.next()){
-                
+            if (rs.next()) {
+
                 obj.setId(rs.getInt("id"));
                 obj.setDescricao(rs.getString("descricao"));
                 obj.setPreco(rs.getDouble("preco"));
@@ -240,6 +240,48 @@ public class ProdutosDAO {
 
             JOptionPane.showMessageDialog(null, "Erro:" + erro);
             return null;
+        }
+    }
+
+    //Metodo de baixa de estoque
+    public void baixaEstoque(int id, int qtd_nova) {
+        try {
+
+            String sql = "update tb_estoque set qtd_estoque ? where id=?";
+            //conectando dbc no sql
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, qtd_nova);
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro;" + erro);
+        }
+    }
+
+    //Metodo que retorna o estoque atual de um product
+    public int retornaEstoqueAtual(int id) {
+        try {
+            int qtd_estoque = 0;
+
+            String sql = "SELECT qtd_estoque from tb_produtos where id=?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Produtos p = new Produtos();
+
+                qtd_estoque = (rs.getInt("qtd_estoque"));
+            }
+
+            return qtd_estoque;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
