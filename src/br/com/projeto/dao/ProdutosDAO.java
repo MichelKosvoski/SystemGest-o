@@ -247,7 +247,7 @@ public class ProdutosDAO {
     public void baixaEstoque(int id, int qtd_nova) {
         try {
 
-            String sql = "update tb_estoque set qtd_estoque ? where id=?";
+            String sql = "update tb_produtos set qtd_estoque=? where id=?";
             //conectando dbc no sql
             PreparedStatement stmt = con.prepareStatement(sql);
 

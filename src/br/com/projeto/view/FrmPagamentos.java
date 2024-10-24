@@ -5,6 +5,7 @@
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ItemVendaDAO;
+import br.com.projeto.dao.ProdutosDAO;
 import br.com.projeto.dao.VendasDAO;
 import br.com.projeto.model.Clientes;
 import br.com.projeto.model.ItemVenda;
@@ -236,7 +237,7 @@ public class FrmPagamentos extends javax.swing.JFrame {
         totalvenda = totalvenda - (totalvenda * pdesconto);
 
         // Calcular o total
-        totalpago = +pdinheiro;
+        totalpago = +pdinheiro +pcartao +ppix;
 
         troco = totalpago - totalvenda;
 
@@ -250,7 +251,7 @@ public class FrmPagamentos extends javax.swing.JFrame {
 
         // Carrega Data atual
         Date agora = new Date();
-        SimpleDateFormat dataEUA = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dataEUA = new SimpleDateFormat("yyyy-MM-dd");
         String datamysql = dataEUA.format(agora);
 
         objv.setData_venda(datamysql);
@@ -263,14 +264,17 @@ public class FrmPagamentos extends javax.swing.JFrame {
         VendasDAO dao_v = new VendasDAO();
         dao_v.cadastrarVenda(objv);
         
-        
+      
         //Retorna o id da ultima venda Realizada
-        objv.setId(dao_v.retornaUltimaVenda());
-        
+        objv.setId(dao_v.retornarUltimaVenda());
         //Cadastrar os produtos na tabela ItemVenda
         for(int i = 0;i<carrinho.getRowCount();i++){
             
+            int qtd_estoque, qtd_comprada, qtd_atualizada;
             Produtos objp = new Produtos();
+            ProdutosDAO dao_produto = new ProdutosDAO();
+            
+            
             ItemVenda item = new ItemVenda();
             item.setVenda(objv);
             
@@ -278,6 +282,18 @@ public class FrmPagamentos extends javax.swing.JFrame {
             item.setProduto(objp);
             item.setQtd(Integer.parseInt(carrinho.getValueAt(i,2).toString()));
             item.setSubtotal(Double.parseDouble(carrinho.getValueAt(i,4).toString()));
+            
+            //baixa estoque
+            qtd_estoque = dao_produto.retornaEstoqueAtual(objp.getId());
+            qtd_comprada = Integer.parseInt(carrinho.getValueAt(i, 2).toString());
+            qtd_atualizada = qtd_estoque - qtd_comprada;
+            
+            dao_produto.baixaEstoque(objp.getId(), qtd_atualizada);
+            
+
+            
+            
+            
             
             ItemVendaDAO daoitem = new ItemVendaDAO();
             daoitem.cadastraItem(item);

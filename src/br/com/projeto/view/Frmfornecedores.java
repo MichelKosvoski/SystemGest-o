@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class Frmfornecedores extends javax.swing.JFrame {
+public class FrmFornecedores extends javax.swing.JFrame {
 
     // Metodo Listar
     public void listar() {
@@ -46,7 +46,7 @@ public class Frmfornecedores extends javax.swing.JFrame {
         }
     }
 
-    public Frmfornecedores() {
+    public FrmFornecedores() {
         initComponents();
         this.getContentPane().setBackground(Color.white);
     }
@@ -708,13 +708,13 @@ public class Frmfornecedores extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frmfornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmFornecedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Frmfornecedores().setVisible(true);
+            new FrmFornecedores().setVisible(true);
         });
     }
 

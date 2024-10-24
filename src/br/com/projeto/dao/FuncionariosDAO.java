@@ -8,8 +8,8 @@ import java.sql.Connection;
 import br.com.projeto.jbdc.ConnectionFactory;
 import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.WebServiceCep;
-import br.com.projeto.view.Frmlogin;
-import br.com.projeto.view.Frmmenu;
+import br.com.projeto.view.FrmLogin;
+import br.com.projeto.view.FrmMenu;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -294,13 +294,13 @@ public class FuncionariosDAO {
             if(rs.next()){
                 //Usuario logado com sucesso
                 JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
-                Frmmenu tela = new Frmmenu();
+                FrmMenu tela = new FrmMenu();
                 tela.usuariologado = rs.getString("nome");
                 tela.setVisible(true);
             }else{
                 //Dados incorretos
                 JOptionPane.showMessageDialog(null, "Dados incorretos!");
-                new Frmlogin().setVisible(true);
+                new FrmLogin().setVisible(true);
                 
             }
 

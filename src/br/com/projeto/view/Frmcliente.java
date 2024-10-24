@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
-public class Frmcliente extends javax.swing.JFrame {
+public class FrmCliente extends javax.swing.JFrame {
 
     // Metodo Listar
     public void listar() {
@@ -47,7 +47,7 @@ public class Frmcliente extends javax.swing.JFrame {
         }
     }
 
-    public Frmcliente() {
+    public FrmCliente() {
         initComponents();
         this.getContentPane().setBackground(Color.white);
     }
@@ -722,13 +722,13 @@ public class Frmcliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Frmcliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Frmcliente().setVisible(true);
+            new FrmCliente().setVisible(true);
         });
     }
 
