@@ -9,11 +9,11 @@ import br.com.projeto.model.Clientes;
 import br.com.projeto.model.WebServiceCep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
 
 /**
  *
@@ -205,12 +205,12 @@ public class ClientesDAO {
             return null;
         }
     }
-    public Clientes buscaPorCpf(String cpf) {
+    public Clientes buscaPorCodigo(String id) {
         try {
             // Comando SQL
-            String sql = "select * from tb_clientes where cpf = ?";
+            String sql = "select * from tb_clientes where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, cpf);
+            stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
             Clientes obj = new Clientes();
             if (rs.next()) {
