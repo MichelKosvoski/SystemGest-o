@@ -4,14 +4,6 @@
  */
 package br.com.projeto.view;
 
-import br.com.projeto.dao.VendasDAO;
-import br.com.projeto.model.Vendas;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author User
@@ -38,96 +30,104 @@ public class FrmDetalheVendas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        txtdatainicio = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtdatafim = new javax.swing.JFormattedTextField();
-        btnbuscar = new javax.swing.JButton();
+        txtdatavenda = new javax.swing.JFormattedTextField();
+        txtcliente = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txttotalvenda = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtobsvenda = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaHistorico = new javax.swing.JTable();
+        tabelaItensVendidos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detalhes Da Vendas");
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
-        jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro de Fornecedores");
+        jLabel2.setText("Detalhes Da Vendas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(384, 384, 384)
                 .addComponent(jLabel2)
-                .addContainerGap(795, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta por Data"));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Data Inicio:");
-
-        try {
-            txtdatainicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtdatainicio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtdatainicio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtdatainicioKeyPressed(evt);
-            }
-        });
+        jLabel7.setText("Cliente:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Data Fim:");
+        jLabel8.setText("Data:");
 
+        txtdatavenda.setEditable(false);
         try {
-            txtdatafim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtdatavenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtdatafim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtdatafim.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtdatavenda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtdatavenda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtdatafimKeyPressed(evt);
+                txtdatavendaKeyPressed(evt);
             }
         });
 
-        btnbuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnbuscar.setText("Pesquisar");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
-            }
-        });
+        txtcliente.setEditable(false);
+        txtcliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Total da Venda:");
+
+        txttotalvenda.setEditable(false);
+        txttotalvenda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setText("Observação:");
+
+        txtobsvenda.setEditable(false);
+        txtobsvenda.setColumns(20);
+        txtobsvenda.setRows(5);
+        jScrollPane2.setViewportView(txtobsvenda);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtdatainicio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtdatafim, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtdatavenda, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txttotalvenda, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(434, 434, 434)
-                        .addComponent(btnbuscar)))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -136,23 +136,32 @@ public class FrmDetalheVendas extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtdatainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(txttotalvenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(txtdatafim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtdatavenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnbuscar)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        tabelaHistorico.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaItensVendidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Data da Venda", "Cliente", "Total da Venda", "Obs"
+                "Produtos", "Qtd comprada", "Preço", "Subtotal"
             }
         ));
-        jScrollPane1.setViewportView(tabelaHistorico);
+        tabelaItensVendidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaItensVendidosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaItensVendidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,9 +170,9 @@ public class FrmDetalheVendas extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,55 +180,22 @@ public class FrmDetalheVendas extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 165, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtdatainicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdatainicioKeyPressed
-
-    }//GEN-LAST:event_txtdatainicioKeyPressed
-
-    private void txtdatafimKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdatafimKeyPressed
+    private void txtdatavendaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdatavendaKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdatafimKeyPressed
+    }//GEN-LAST:event_txtdatavendaKeyPressed
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        try {
-              //botão buscar vendas por periodo
-        
-        //Receber as datas
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        LocalDate data_inicio = LocalDate.parse(txtdatainicio.getText(), formato);
-        LocalDate data_fim = LocalDate.parse(txtdatafim.getText(), formato);
-        
-        VendasDAO dao = new VendasDAO();
-        List<Vendas>lista = dao.listarVendasPorPeriodo(data_inicio, data_fim);
-        
-        DefaultTableModel dados = (DefaultTableModel) tabelaHistorico.getModel();
-        dados.setNumRows(0);
-        
-         for (Vendas v : lista) {
-            dados.addRow(new Object[]{
-                v.getId(),
-                v.getData_venda(),
-                v.getCliente().getNome(),
-                v.getTotal_venda(),
-                v.getObs(),
-            });
-        }
-        
-                                             
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado!");
-        }
-        
-    }//GEN-LAST:event_btnbuscarActionPerformed
+    private void tabelaItensVendidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaItensVendidosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaItensVendidosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -258,15 +234,19 @@ public class FrmDetalheVendas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaHistorico;
-    private javax.swing.JFormattedTextField txtdatafim;
-    private javax.swing.JFormattedTextField txtdatainicio;
+    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JTable tabelaItensVendidos;
+    public javax.swing.JTextField txtcliente;
+    public javax.swing.JFormattedTextField txtdatavenda;
+    public javax.swing.JTextArea txtobsvenda;
+    public javax.swing.JTextField txttotalvenda;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,8 +6,13 @@ package br.com.projeto.dao;
 
 import br.com.projeto.jbdc.ConnectionFactory;
 import br.com.projeto.model.ItemVenda;
+import br.com.projeto.model.Produtos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,6 +49,46 @@ public class ItemVendaDAO {
         }
     }
 
+    // Metodo que lista itens vendidos de uma venda por id
+    //metodo que filtra venda por data
+public List<ItemVenda> listaItensPorVenda(int venda_id) {
+    try {
+        // Criando Lista
+        List<ItemVenda> lista = new ArrayList<>();
+
+        // Consulta SQL corrigida
+        String query = "select i.id, p.descricao, i.qtd, p.preco, i.subtotal "
+                     + "from tb_itensvendas as i "
+                     + "inner join tb_produtos as p on (i.produto_id = p.id) "
+                     + "where i.venda_id = ?";
+        
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, venda_id);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            ItemVenda item = new ItemVenda();
+            Produtos prod = new Produtos();
+            
+            // Mapeamento correto
+            item.setId(rs.getInt("i.id"));
+            prod.setDescricao(rs.getString("p.descricao"));
+            item.setQtd(rs.getInt("i.qtd"));
+            prod.setPreco(rs.getDouble("p.preco"));
+            item.setSubtotal(rs.getDouble("i.subtotal"));
+            
+            // Associa o produto ao item
+            item.setProduto(prod);
+
+            // Adiciona o item à lista
+            lista.add(item);
+        }
+
+        return lista;
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    }
 }
-
-

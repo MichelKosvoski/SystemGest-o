@@ -4,8 +4,12 @@
  */
 package br.com.projeto.view;
 
+import br.com.projeto.dao.ItemVendaDAO;
 import br.com.projeto.dao.VendasDAO;
+import br.com.projeto.model.ItemVenda;
+import br.com.projeto.model.Produtos;
 import br.com.projeto.model.Vendas;
+import br.com.projeto.view.FrmDetalheVendas;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -16,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author User
  */
+
 public class FrmHistoricoVenda extends javax.swing.JFrame {
 
     /**
@@ -49,25 +54,25 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
-        jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cadastro de Fornecedores");
+        jLabel2.setText("Histórico de Vendas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(421, 421, 421)
                 .addComponent(jLabel2)
-                .addContainerGap(795, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel2)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta por Data"));
@@ -152,6 +157,11 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
                 "Código", "Data da Venda", "Cliente", "Total da Venda", "Obs"
             }
         ));
+        tabelaHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaHistoricoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaHistorico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,7 +173,7 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,71 +200,110 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         try {
-              //botão buscar vendas por periodo
-        
-        //Receber as datas
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        LocalDate data_inicio = LocalDate.parse(txtdatainicio.getText(), formato);
-        LocalDate data_fim = LocalDate.parse(txtdatafim.getText(), formato);
-        
-        VendasDAO dao = new VendasDAO();
-        List<Vendas>lista = dao.listarVendasPorPeriodo(data_inicio, data_fim);
-        
-        DefaultTableModel dados = (DefaultTableModel) tabelaHistorico.getModel();
-        dados.setNumRows(0);
-        
-         for (Vendas v : lista) {
-            dados.addRow(new Object[]{
-                v.getId(),
-                v.getData_venda(),
-                v.getCliente().getNome(),
-                v.getTotal_venda(),
-                v.getObs(),
-            });
-        }
-        
-                                             
+            //botão buscar vendas por periodo
+
+            //Receber as datas
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            LocalDate data_inicio = LocalDate.parse(txtdatainicio.getText(), formato);
+            LocalDate data_fim = LocalDate.parse(txtdatafim.getText(), formato);
+
+            VendasDAO dao = new VendasDAO();
+            List<Vendas> lista = dao.listarVendasPorPeriodo(data_inicio, data_fim);
+
+            DefaultTableModel dados = (DefaultTableModel) tabelaHistorico.getModel();
+            dados.setNumRows(0);
+
+            for (Vendas v : lista) {
+                dados.addRow(new Object[]{
+                    v.getId(),
+                    v.getData_venda(),
+                    v.getCliente().getNome(),
+                    v.getTotal_venda(),
+                    v.getObs(),});
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Nenhum registro encontrado!");
         }
-        
+
     }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void tabelaHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaHistoricoMouseClicked
+
+        try {
+            // Abrir detalhes da venda
+            FrmDetalheVendas tela = new FrmDetalheVendas();
+
+            // Preencher campos com dados da venda
+            tela.txtcliente.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 2).toString());
+            tela.txttotalvenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 3).toString());
+            tela.txtdatavenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 1).toString());
+            tela.txtobsvenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 4).toString());
+
+            // Obter ID da venda
+            int venda_id = Integer.parseInt(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 0).toString());
+            System.out.println("Venda ID selecionada: " + venda_id);
+
+            // Buscar itens da venda
+            ItemVendaDAO dao_item = new ItemVendaDAO();
+            List<ItemVenda> listaitens = dao_item.listaItensPorVenda(venda_id);
+
+            // Preencher tabela de itens vendidos
+            DefaultTableModel dados = (DefaultTableModel) tela.tabelaItensVendidos.getModel();
+            dados.setNumRows(0);
+
+            for (ItemVenda c : listaitens) {
+                System.out.println("Adicionando produto: " + c.getProduto().getDescricao());
+                dados.addRow(new Object[]{
+                    c.getProduto().getDescricao(),
+                    c.getQtd(),
+                    c.getProduto().getPreco(),
+                    c.getSubtotal(),});
+            }
+
+            // Exibir tela
+            tela.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao carregar detalhes da venda: " + e.getMessage());
+        }
+    
+    }//GEN-LAST:event_tabelaHistoricoMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Windows".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmHistoricoVenda().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(() -> {
+        new FrmHistoricoVenda().setVisible(true);
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
