@@ -21,12 +21,12 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 
-public class FrmHistoricoVenda extends javax.swing.JFrame {
+public class FrmTotalVendas extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmHistoricoVenda
      */
-    public FrmHistoricoVenda() {
+    public FrmTotalVendas() {
         initComponents();
     }
 
@@ -46,9 +46,9 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
         txtdatainicio = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         txtdatafim = new javax.swing.JFormattedTextField();
-        btnbuscar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaHistorico = new javax.swing.JTable();
+        txtconsultar = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txttotalvenda = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,14 +56,14 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Histórico de Vendas");
+        jLabel2.setText("Total Vendas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(421, 421, 421)
+                .addGap(236, 236, 236)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -107,62 +107,59 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
             }
         });
 
-        btnbuscar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnbuscar.setText("Pesquisar");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+        txtconsultar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtconsultar.setText("Consultar");
+        txtconsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
+                txtconsultarActionPerformed(evt);
             }
         });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setText("Total da Venda:");
+
+        txttotalvenda.setEditable(false);
+        txttotalvenda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtdatainicio, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtdatafim, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtdatafim, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtconsultar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(434, 434, 434)
-                        .addComponent(btnbuscar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txttotalvenda, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtdatainicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(txtdatafim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnbuscar)
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(txtdatafim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtconsultar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txttotalvenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
-
-        tabelaHistorico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Data da Venda", "Cliente", "Total da Venda", "Obs"
-            }
-        ));
-        tabelaHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaHistoricoMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabelaHistorico);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,10 +167,6 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,9 +174,7 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 165, Short.MAX_VALUE))
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         pack();
@@ -198,76 +189,28 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtdatafimKeyPressed
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+    private void txtconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconsultarActionPerformed
+        //Botao calcular totais de vendas por mês e dias
         try {
-            //botão buscar vendas por periodo
-
-            //Receber as datas
+            //Receber data 
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             LocalDate data_inicio = LocalDate.parse(txtdatainicio.getText(), formato);
             LocalDate data_fim = LocalDate.parse(txtdatafim.getText(), formato);
-
+            
+            double total_venda;
             VendasDAO dao = new VendasDAO();
-            List<Vendas> lista = dao.listarVendasPorPeriodo(data_inicio, data_fim);
+            total_venda = dao.retornaTotalVendas(data_fim);
+            
+            txttotalvenda.setText(String.valueOf(total_venda));
 
-            DefaultTableModel dados = (DefaultTableModel) tabelaHistorico.getModel();
-            dados.setNumRows(0);
-
-            for (Vendas v : lista) {
-                dados.addRow(new Object[]{
-                    v.getId(),
-                    v.getData_venda(),
-                    v.getCliente().getNome(),
-                    v.getTotal_venda(),
-                    v.getObs(),});
-            }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Nenhum registro encontrado!");
+            
+            JOptionPane.showMessageDialog(null, "Informe uma data corretamente" +e);
         }
 
-    }//GEN-LAST:event_btnbuscarActionPerformed
-
-    private void tabelaHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaHistoricoMouseClicked
-
-        try {
-            // Abrir detalhes da venda
-            FrmDetalheVendas tela = new FrmDetalheVendas();
-
-            // Preencher campos com dados da venda
-            tela.txtcliente.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 2).toString());
-            tela.txttotalvenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 3).toString());
-            tela.txtdatavenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 1).toString());
-            tela.txtobsvenda.setText(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 4).toString());
-
-            // Obter ID da venda
-            int venda_id = Integer.parseInt(tabelaHistorico.getValueAt(tabelaHistorico.getSelectedRow(), 0).toString());
-            // Buscar itens da venda
-            ItemVendaDAO dao_item = new ItemVendaDAO();
-            List<ItemVenda> listaitens = dao_item.listaItensPorVenda(venda_id);
-
-            // Preencher tabela de itens vendidos
-            DefaultTableModel dados = (DefaultTableModel) tela.tabelaItensVendidos.getModel();
-            dados.setNumRows(0);
-
-            for (ItemVenda c : listaitens) {
-                dados.addRow(new Object[]{
-                    c.getProduto().getDescricao(),
-                    c.getQtd(),
-                    c.getProduto().getPreco(),
-                    c.getSubtotal(),});
-            }
-
-            // Exibir tela
-            tela.setVisible(true);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao carregar detalhes da venda: " + e.getMessage());
-        }
-    
-    }//GEN-LAST:event_tabelaHistoricoMouseClicked
+    }//GEN-LAST:event_txtconsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,32 +229,33 @@ public class FrmHistoricoVenda extends javax.swing.JFrame {
             }
         }
     } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        java.util.logging.Logger.getLogger(FrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        java.util.logging.Logger.getLogger(FrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        java.util.logging.Logger.getLogger(FrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(FrmHistoricoVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        java.util.logging.Logger.getLogger(FrmTotalVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
     //</editor-fold>
 
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(() -> {
-        new FrmHistoricoVenda().setVisible(true);
+        new FrmTotalVendas().setVisible(true);
     });
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaHistorico;
+    private javax.swing.JButton txtconsultar;
     private javax.swing.JFormattedTextField txtdatafim;
     private javax.swing.JFormattedTextField txtdatainicio;
+    public javax.swing.JTextField txttotalvenda;
     // End of variables declaration//GEN-END:variables
 }

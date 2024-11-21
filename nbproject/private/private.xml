@@ -4,10 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmProdutos.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmLogin.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmFuncionarios.java</file>
             <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/dao/ItemVendaDAO.java</file>
-            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/model/ItemVenda.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmFornecedores.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmMenu.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmDeasBoard.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmVendas.java</file>
             <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmDetalheVendas.java</file>
             <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmHistoricoVenda.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmPagamentos.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmCliente.java</file>
         </group>
     </open-files>
 </project-private>
