@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmDetalheVendas.java</file>
-            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmHistoricoVenda.java</file>
-            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/dao/VendasDAO.java</file>
-            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmTotalVendas.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmFuncionarios.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/view/FrmMenu.java</file>
+            <file>file:/C:/Users/User/Desktop/Enginer%20Software/Projetos%20Dev/Projeto%20Java/System%20Comercial%20Java/Projeto%20Venda%20Java/src/br/com/projeto/dao/FuncionariosDAO.java</file>
         </group>
     </open-files>
 </project-private>

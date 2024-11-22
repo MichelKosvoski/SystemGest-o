@@ -4,12 +4,12 @@
  */
 package br.com.projeto.dao;
 
-import java.sql.Connection;
 import br.com.projeto.jbdc.ConnectionFactory;
 import br.com.projeto.model.Funcionarios;
 import br.com.projeto.model.WebServiceCep;
 import br.com.projeto.view.FrmLogin;
 import br.com.projeto.view.FrmMenu;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -288,25 +288,45 @@ public class FuncionariosDAO {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, senha);
-            
+
             ResultSet rs = stmt.executeQuery();
-            
-            if(rs.next()){
-                //Usuario logado com sucesso
-                JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
-                FrmMenu tela = new FrmMenu();
-                tela.usuariologado = rs.getString("nome");
-                tela.setVisible(true);
-            }else{
+
+            if (rs.next()) {
+
+                // user admin
+                if (rs.getString("nivel_acesso").equals("Admin")) {
+                    //Usuario logado com sucesso
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
+                    FrmMenu tela = new FrmMenu();
+                    tela.usuariologado = rs.getString("nome");
+                    tela.setVisible(true);
+
+                }
+                //caso seija do tipo limit
+                else if (rs.getString("nivel_acesso").equals("Usuário")) {
+                    //Usuario logado com sucesso
+                    JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
+                    FrmMenu tela = new FrmMenu();
+                    tela.usuariologado = rs.getString("nome");
+                    
+                    //Desabilitar os Menus
+                    tela.menu_posicao.setEnabled(false);
+                    tela.menu_controle.setVisible(false);
+                    
+                    tela.setVisible(true);
+
+                }
+
+            } else {
                 //Dados incorretos
                 JOptionPane.showMessageDialog(null, "Dados incorretos!");
                 new FrmLogin().setVisible(true);
-                
+
             }
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro:" + erro);
-            
+
         }
 
     }
