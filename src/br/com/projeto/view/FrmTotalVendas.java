@@ -192,17 +192,20 @@ public class FrmTotalVendas extends javax.swing.JFrame {
     private void txtconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconsultarActionPerformed
         //Botao calcular totais de vendas por mês e dias
         try {
-            //Receber data 
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+// Formato para as datas
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            LocalDate data_inicio = LocalDate.parse(txtdatainicio.getText(), formato);
-            LocalDate data_fim = LocalDate.parse(txtdatafim.getText(), formato);
-            
-            double total_venda;
-            VendasDAO dao = new VendasDAO();
-            total_venda = dao.retornaTotalVendas(data_fim);
-            
-            txttotalvenda.setText(String.valueOf(total_venda));
+        // Receber as datas do campo de texto
+        LocalDate data_inicio = LocalDate.parse(txtdatainicio.getText(), formato);
+        LocalDate data_fim = LocalDate.parse(txtdatafim.getText(), formato);
+
+        // Chamar o método no DAO para calcular o total
+        double total_venda;
+        VendasDAO dao = new VendasDAO();
+        total_venda = dao.retornaTotalVendas(data_inicio, data_fim);
+
+        // Exibir o total no campo de texto
+        txttotalvenda.setText(String.valueOf(total_venda));
 
 
         } catch (Exception e) {

@@ -73,7 +73,8 @@ public class VendasDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        }
+    }
+
     //metodo que filtra venda por data
     public List<Vendas> listarVendasPorPeriodo(LocalDate data_inicio, LocalDate data_fim) {
 
@@ -84,23 +85,23 @@ public class VendasDAO {
             // Comando SQL
             String sql = "select v.id, date_format(v.data_venda,'%d/%m/%y') as data_formatada, c.nome, v.total_venda, v.observacoes from tb_vendas as v "
                     + "inner join tb_clientes as c on(v.cliente_id = c.id) where v.data_venda BETWEEN? AND?";
-            
+
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, data_inicio.toString());
             stmt.setString(2, data_fim.toString());
-            
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Vendas obj = new Vendas();
                 Clientes c = new Clientes();
-                
+
                 obj.setId(rs.getInt("v.id"));
                 obj.setData_venda(rs.getString("data_formatada"));
                 c.setNome(rs.getString("c.nome"));
                 obj.setTotal_venda(rs.getDouble("v.total_venda"));
                 obj.setObs(rs.getString("v.observacoes"));
-                
+
                 obj.setCliente(c);
 
                 lista.add(obj);
@@ -115,28 +116,30 @@ public class VendasDAO {
             return null;
         }
     }
-    //Metodo que calcula totais de vendas
-    public double  retornaTotalVendas(LocalDate data_venda){
-        try {
-            
-            double totalvenda = 0;
-            
-            String sql = "select sum(total_venda) as total from tb_vendas where data_venda=?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, data_venda.toString());
-            
-            ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()){
-                
-                totalvenda=rs.getDouble("total");
-                                
-            }
-            return totalvenda;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
-}
 
+    //Metodo que calcula totais de vendas
+    public double retornaTotalVendas(LocalDate dataInicio, LocalDate dataFim) {
+       
+            double totalvenda = 0.0;
+
+            String sql = "SELECT SUM(total_venda) AS total FROM tb_vendas WHERE data_venda BETWEEN ? AND ?";
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+                // Configura os parâmetros do PreparedStatement
+                ps.setDate(1, java.sql.Date.valueOf(dataInicio));
+                ps.setDate(2, java.sql.Date.valueOf(dataFim));
+
+                // Executa a consulta
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    totalvenda = rs.getDouble("total");
+                }
+
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao calcular total de vendas: ", e);
+            }
+
+            return totalvenda;
+        }
+
+    }
