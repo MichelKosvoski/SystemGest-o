@@ -311,7 +311,7 @@ public class FuncionariosDAO {
                     
                     //Desabilitar os Menus
                     tela.menu_posicao.setEnabled(false);
-                    tela.menu_controle.setVisible(false);
+                    tela.Historico.setVisible(false);
                     
                     tela.setVisible(true);
 
