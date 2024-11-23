@@ -284,4 +284,19 @@ public class ProdutosDAO {
             throw new RuntimeException(e);
         }
     }
+    
+    public void adiconarEstoque(int id, int qtd_novo){
+        try {
+            
+            String sql = "update tb_produtos set qtd_estoque=? where id=?";
+            
+            PreparedStatement stmt = con.prepareStatement(sql);
+            
+            stmt.setInt(1, qtd_novo);
+            stmt.setInt(2, id);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception e) {
+        }
+    }
 }
