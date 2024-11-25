@@ -296,7 +296,8 @@ public class ProdutosDAO {
             stmt.setInt(2, id);
             stmt.execute();
             stmt.close();
-        } catch (Exception e) {
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro;" +erro);
         }
     }
 }

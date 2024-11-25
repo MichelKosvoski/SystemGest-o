@@ -56,6 +56,12 @@ public class FrmProdutos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         ConsutaProdutos = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel115 = new javax.swing.JLabel();
+        txtpesquisa = new javax.swing.JTextField();
+        btnpesquisar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaProdutos = new javax.swing.JTable();
         PainelDados = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtdescricao = new javax.swing.JTextField();
@@ -72,12 +78,6 @@ public class FrmProdutos extends javax.swing.JFrame {
         btnalterar = new javax.swing.JButton();
         btnbuscar = new javax.swing.JButton();
         txtqtd_estoque = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel115 = new javax.swing.JLabel();
-        txtpesquisa = new javax.swing.JTextField();
-        btnpesquisar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProdutos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -110,6 +110,74 @@ public class FrmProdutos extends javax.swing.JFrame {
         );
 
         ConsutaProdutos.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel115.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel115.setText("Nome:");
+
+        txtpesquisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpesquisaActionPerformed(evt);
+            }
+        });
+
+        btnpesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnpesquisar.setText("Pesquisar");
+        btnpesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpesquisarActionPerformed(evt);
+            }
+        });
+
+        tabelaProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Descrição", "Preço", "Qtd.Estoque", "Fornecedor"
+            }
+        ));
+        tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaProdutosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaProdutos);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel115)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnpesquisar)
+                        .addGap(0, 610, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel115)
+                    .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnpesquisar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
+        );
+
+        ConsutaProdutos.addTab("Consultar de Produtos", jPanel4);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Código:");
@@ -273,74 +341,6 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         ConsutaProdutos.addTab("Dados do Produto", PainelDados);
 
-        jLabel115.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel115.setText("Nome:");
-
-        txtpesquisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtpesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpesquisaActionPerformed(evt);
-            }
-        });
-
-        btnpesquisar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnpesquisar.setText("Pesquisar");
-        btnpesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnpesquisarActionPerformed(evt);
-            }
-        });
-
-        tabelaProdutos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Descrição", "Preço", "Qtd.Estoque", "Fornecedor"
-            }
-        ));
-        tabelaProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaProdutosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabelaProdutos);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel115)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnpesquisar)
-                        .addGap(0, 610, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel115)
-                    .addComponent(txtpesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnpesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
-        );
-
-        ConsutaProdutos.addTab("Consultar de Produtos", jPanel4);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -361,6 +361,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnalterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnalterarActionPerformed
