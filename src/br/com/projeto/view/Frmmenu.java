@@ -56,7 +56,7 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         MenuFornecedores = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        ControleEstoque = new javax.swing.JMenuItem();
         ConsultaProdutos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         Menu_Vendas = new javax.swing.JMenuItem();
@@ -109,7 +109,7 @@ public class FrmMenu extends javax.swing.JFrame {
         painel_desktopLayout.setVerticalGroup(
             painel_desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painel_desktopLayout.createSequentialGroup()
-                .addGap(0, 514, Short.MAX_VALUE)
+                .addGap(0, 515, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -155,8 +155,13 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produtos.png"))); // NOI18N
         jMenu6.setText("Produto");
 
-        jMenuItem4.setText("Controle de Estoque");
-        jMenu6.add(jMenuItem4);
+        ControleEstoque.setText("Controle de Estoque");
+        ControleEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ControleEstoqueActionPerformed(evt);
+            }
+        });
+        jMenu6.add(ControleEstoque);
 
         ConsultaProdutos.setText("Consulta de Produto");
         ConsultaProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -275,13 +280,13 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitMouseClicked
 
     private void MenuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuFuncionariosActionPerformed
-        // TODO add your handling code here:
+        // Funcionarios
         FrmFuncionarios tela = new FrmFuncionarios();
         tela.setVisible(true);
     }//GEN-LAST:event_MenuFuncionariosActionPerformed
 
     private void MenuFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuFornecedoresActionPerformed
-        // TODO add your handling code here:
+        // Fornecedores
         FrmFornecedores tela = new FrmFornecedores();
         tela.setVisible(true);
     }//GEN-LAST:event_MenuFornecedoresActionPerformed
@@ -293,16 +298,22 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_VendasActionPerformed
 
     private void menu_posicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_posicaoActionPerformed
-        // TODO add your handling code here:
+        // Menu posição
         FrmTotalVendas tela = new FrmTotalVendas();
         tela.setVisible(true);
     }//GEN-LAST:event_menu_posicaoActionPerformed
 
     private void HistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoricoActionPerformed
-        // TODO add your handling code here:
+        // Historico
         FrmHistoricoVenda tela = new FrmHistoricoVenda();
         tela.setVisible(true);
     }//GEN-LAST:event_HistoricoActionPerformed
+
+    private void ControleEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ControleEstoqueActionPerformed
+        // Controle Estoque
+        FrmEstoque tela = new FrmEstoque();
+        tela.setVisible(true);
+    }//GEN-LAST:event_ControleEstoqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,6 +354,7 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ConsultaProdutos;
     private javax.swing.JMenuItem ControleClientes;
+    private javax.swing.JMenuItem ControleEstoque;
     private javax.swing.JMenu Exit;
     public javax.swing.JMenuItem Historico;
     private javax.swing.JMenuItem MenuFornecedores;
@@ -358,7 +370,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JMenuItem menu_posicao;
     private javax.swing.JDesktopPane painel_desktop;

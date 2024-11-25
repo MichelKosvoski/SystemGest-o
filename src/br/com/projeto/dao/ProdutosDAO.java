@@ -284,20 +284,35 @@ public class ProdutosDAO {
             throw new RuntimeException(e);
         }
     }
-    
-    public void adiconarEstoque(int id, int qtd_novo){
+
+    public void adiconarEstoque(int id, int qtd_novo) {
         try {
-            
+
             String sql = "update tb_produtos set qtd_estoque=? where id=?";
-            
+
             PreparedStatement stmt = con.prepareStatement(sql);
-            
+
             stmt.setInt(1, qtd_novo);
             stmt.setInt(2, id);
             stmt.execute();
             stmt.close();
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro;" +erro);
+            JOptionPane.showMessageDialog(null, "Erro;" + erro);
         }
+    }
+
+    public void DiminuirEstoque(int idProduto, int qtdNova) throws SQLException {
+        try {
+            String sql = "update tb_produtos set qtd_estoque=? where id=?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, qtdNova); // Nova quantidade
+            stmt.setInt(2, idProduto); // ID do produto
+            stmt.executeUpdate();
+            
+
+        } catch (Exception e) {
+        }
+
     }
 }

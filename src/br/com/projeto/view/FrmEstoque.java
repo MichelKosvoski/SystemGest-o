@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class FrmEstoque extends javax.swing.JFrame {
-    
+
     int idproduto, qtd_nova;
 
     // Metodo Listar
@@ -30,14 +30,13 @@ public class FrmEstoque extends javax.swing.JFrame {
         DefaultTableModel dados = (DefaultTableModel) tabelaEstoque.getModel();
         dados.setNumRows(0);
 
-         for (Produtos c : lista) {
+        for (Produtos c : lista) {
             dados.addRow(new Object[]{
                 c.getId(),
                 c.getDescricao(),
                 c.getPreco(),
                 c.getQtd_estoque(),
-                c.getFornecedor().getNome(),
-            });
+                c.getFornecedor().getNome(),});
         }
     }
 
@@ -70,6 +69,9 @@ public class FrmEstoque extends javax.swing.JFrame {
         txtqtd = new javax.swing.JTextField();
         brnadicionar = new javax.swing.JButton();
         jLabel118 = new javax.swing.JLabel();
+        jLabel119 = new javax.swing.JLabel();
+        txtdiminuir = new javax.swing.JTextField();
+        brnDiminuir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -168,6 +170,24 @@ public class FrmEstoque extends javax.swing.JFrame {
         jLabel118.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel118.setText("Lista de Produtos:");
 
+        jLabel119.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel119.setText("Qtd:");
+
+        txtdiminuir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtdiminuir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtdiminuirActionPerformed(evt);
+            }
+        });
+
+        brnDiminuir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        brnDiminuir.setText("Diminuir");
+        brnDiminuir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brnDiminuirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -177,25 +197,37 @@ public class FrmEstoque extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel115)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtdescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnpesquisar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel116)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtestoque, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel117)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtqtd)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(599, 599, 599))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnpesquisar)
-                            .addComponent(brnadicionar)))
-                    .addComponent(jLabel118))
-                .addContainerGap(595, Short.MAX_VALUE))
+                            .addComponent(jLabel118)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel117)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtqtd))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel119)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtdiminuir, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(brnadicionar)
+                                    .addComponent(brnDiminuir))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,15 +240,26 @@ public class FrmEstoque extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel116)
-                    .addComponent(txtestoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel117)
-                    .addComponent(txtqtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(brnadicionar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(txtestoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel119)
+                            .addComponent(txtdiminuir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel117)
+                            .addComponent(txtqtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(brnDiminuir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(brnadicionar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel118)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         ConsutaProdutos.addTab("Consultar de Produtos", jPanel4);
@@ -236,8 +279,8 @@ public class FrmEstoque extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ConsutaProdutos)
-                .addGap(18, 18, 18))
+                .addComponent(ConsutaProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -270,8 +313,7 @@ public class FrmEstoque extends javax.swing.JFrame {
                 c.getDescricao(),
                 c.getPreco(),
                 c.getQtd_estoque(),
-                c.getFornecedor().getNome(),
-            });
+                c.getFornecedor().getNome(),});
         }
     }//GEN-LAST:event_btnpesquisarActionPerformed
 
@@ -291,19 +333,54 @@ public class FrmEstoque extends javax.swing.JFrame {
         // botao add produto no estoque
         try {
             int qtd_estoque, qtd_atualizada, qtd;
-            
-            qtd_estoque = Integer.parseInt(txtestoque.getText());       
+
+            qtd_estoque = Integer.parseInt(txtestoque.getText());
             qtd = Integer.parseInt(txtqtd.getText());
             qtd_nova = qtd_estoque + qtd;
-                    
-            ProdutosDAO dao = new ProdutosDAO();                
+
+            ProdutosDAO dao = new ProdutosDAO();
             dao.adiconarEstoque(idproduto, qtd_nova);
-            
-            JOptionPane.showMessageDialog(null,"Estoque do Produto Atualizada!");
+
+            JOptionPane.showMessageDialog(null, "Estoque do Produto Atualizada!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Selecione o Produto e informa a nova qtd!" + e);
         }
     }//GEN-LAST:event_brnadicionarActionPerformed
+
+    private void txtdiminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdiminuirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtdiminuirActionPerformed
+
+    private void brnDiminuirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnDiminuirActionPerformed
+        // Botao de diminuir
+        try {
+            try {
+                int qtd_estoque, qtd, qtd_nova;
+
+                // Pega os valores do estoque atual e da quantidade informada
+                qtd_estoque = Integer.parseInt(txtestoque.getText()); // Estoque atual
+                qtd = Integer.parseInt(txtdiminuir.getText());             // Quantidade informada
+
+                // Verifica se a operação é para somar ou subtrair
+                if (qtd_estoque >= qtd) {
+                    // Atualiza o estoque subtraindo a quantidade informada
+                    qtd_nova = qtd_estoque - qtd;
+
+                    ProdutosDAO dao = new ProdutosDAO();
+                    dao.DiminuirEstoque(idproduto, qtd_nova); // Chame o método no DAO para atualizar
+
+                    JOptionPane.showMessageDialog(null, "Estoque do Produto Atualizado! Nova quantidade: " + qtd_nova);
+                    listarProdutos(); // Atualiza a tabela de produtos
+                } else {
+                    JOptionPane.showMessageDialog(null, "Quantidade insuficiente no estoque!");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro: Selecione o Produto e informe a quantidade válida! " + e.getMessage());
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_brnDiminuirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,18 +411,21 @@ public class FrmEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTabbedPane ConsutaProdutos;
+    private javax.swing.JButton brnDiminuir;
     private javax.swing.JButton brnadicionar;
     private javax.swing.JButton btnpesquisar;
     private javax.swing.JLabel jLabel115;
     private javax.swing.JLabel jLabel116;
     private javax.swing.JLabel jLabel117;
     private javax.swing.JLabel jLabel118;
+    private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaEstoque;
     private javax.swing.JTextField txtdescricao;
+    private javax.swing.JTextField txtdiminuir;
     private javax.swing.JTextField txtestoque;
     private javax.swing.JTextField txtqtd;
     // End of variables declaration//GEN-END:variables
