@@ -74,7 +74,7 @@ public class ClientesJuridicosDAO {
      *
      * @return Lista de ClientesJuridicos
      */
-    public List<ClientesJuridicos> listarClientes() {
+    public List<ClientesJuridicos> listarClientesPJ() {
         List<ClientesJuridicos> lista = new ArrayList<>();
         String sql = "SELECT * FROM tb_clientes_juridicos";
 

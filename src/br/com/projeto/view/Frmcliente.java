@@ -11,10 +11,10 @@ import br.com.projeto.model.ClientesJuridicos;
 import br.com.projeto.model.Utilitarios;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -50,6 +50,41 @@ public class FrmCliente extends javax.swing.JFrame {
                 c.getBairro(),
                 c.getCidade(),
                 c.getUf()
+            });
+        }
+    }
+
+    public void listarpj() {
+        // Criando uma instância do DAO para acessar os dados
+        ClientesJuridicosDAO dao = new ClientesJuridicosDAO();
+
+        // Recuperando a lista de clientes jurídicos
+        List<ClientesJuridicos> lista = dao.listarClientesPJ();
+
+        // Obtenha o modelo da tabela
+        DefaultTableModel dados = (DefaultTableModel) tabelaClientesPj.getModel();
+
+        // Limpe a tabela antes de adicionar os novos dados
+        dados.setNumRows(0);
+
+        // Itere sobre a lista de clientes jurídicos e adicione os dados à tabela
+        for (ClientesJuridicos c : lista) {
+            dados.addRow(new Object[]{
+                c.getId(), // ID
+                c.getRazaoSocial(), // Razão Social
+                c.getNomeFantasia(), // Nome Fantasia
+                c.getCnpj(), // CNPJ
+                c.getEmail(), // Email
+                c.getTelefone(), // Telefone
+                c.getCelular(), // Celular
+                c.getCep(), // CEP
+                c.getEndereco(), // Endereço
+                c.getNumero(), // Número
+                c.getComplemento(), // Complemento
+                c.getBairro(), // Bairro
+                c.getCidade(), // Cidade
+                c.getEstado(), // Estado
+                c.getDataCadastro() // Data de Cadastro
             });
         }
     }
@@ -1068,6 +1103,7 @@ public class FrmCliente extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // Carrega Lista
         listar();
+        listarpj();
     }//GEN-LAST:event_formWindowActivated
 
     private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
@@ -1232,7 +1268,7 @@ public class FrmCliente extends javax.swing.JFrame {
         dao.cadastrarCliente(cliente);
 
         JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
-    
+
 
     }//GEN-LAST:event_btnsalvarjrActionPerformed
 
@@ -1259,6 +1295,48 @@ public class FrmCliente extends javax.swing.JFrame {
 
     private void tabelaClientesPjMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesPjMouseClicked
         // TODO add your handling code here:
+        // Obtenha a linha selecionada
+        int row = tabelaClientesPj.getSelectedRow();
+
+        // Verifique se uma linha foi selecionada
+        if (row != -1) {
+            // Recuperando os dados da linha selecionada
+            int id = (int) tabelaClientesPj.getValueAt(row, 0); // ID
+            String razaoSocial = (String) tabelaClientesPj.getValueAt(row, 1); // Razão Social
+            String nomeFantasia = (String) tabelaClientesPj.getValueAt(row, 2); // Nome Fantasia
+            String cnpj = (String) tabelaClientesPj.getValueAt(row, 3); // CNPJ
+            String email = (String) tabelaClientesPj.getValueAt(row, 4); // Email
+            String telefone = (String) tabelaClientesPj.getValueAt(row, 5); // Telefone
+            String celular = (String) tabelaClientesPj.getValueAt(row, 6); // Celular
+            String cep = (String) tabelaClientesPj.getValueAt(row, 7); // CEP
+            String endereco = (String) tabelaClientesPj.getValueAt(row, 8); // Endereço
+            int numero = (int) tabelaClientesPj.getValueAt(row, 9); // Número
+            String complemento = (String) tabelaClientesPj.getValueAt(row, 10); // Complemento
+            String bairro = (String) tabelaClientesPj.getValueAt(row, 11); // Bairro
+            String cidade = (String) tabelaClientesPj.getValueAt(row, 12); // Cidade
+            String estado = (String) tabelaClientesPj.getValueAt(row, 13); // Estado
+            String dataCadastroString = (String) tabelaClientesPj.getValueAt(row, 14);
+            // Exemplo de exibição dos dados em campos de texto
+            txtrazaosocial.setText(razaoSocial);
+            txtnomefantasia.setText(nomeFantasia);
+            txtcnpj.setText(cnpj);
+            txtemailempresarial.setText(email);
+            txttelefoneempresarial.setText(telefone);
+            txtcelularempresarial.setText(celular);
+            txtcepjuridica.setText(cep);
+            txtenderecojuridica.setText(endereco);
+            txtnumerojuridica.setText(String.valueOf(numero));
+            txtcomplementojuridico.setText(complemento);
+            txtbairro.setText(bairro);
+            txtcidadejuridica.setText(cidade);
+            cbufjr.setSelectedItem(estado);
+
+            // Aqui, você pode também converter a data de cadastro para o formato correto
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            txtdatajuridico.setText(dateFormat.format(dataCadastroString));
+        }
+
+    
     }//GEN-LAST:event_tabelaClientesPjMouseClicked
 
     private void txtdatajuridicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdatajuridicoActionPerformed
@@ -1356,7 +1434,7 @@ public class FrmCliente extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> nj;
     private javax.swing.JTable tabelaClientes;
-    private javax.swing.JTable tabelaClientesPj;
+    public javax.swing.JTable tabelaClientesPj;
     private javax.swing.JTextField txtbairro;
     private javax.swing.JTextField txtbairrojuridica;
     private javax.swing.JFormattedTextField txtcelular;
