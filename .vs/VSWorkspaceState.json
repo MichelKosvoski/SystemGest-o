@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\br",
+    "\\src\\br\\com",
+    "\\src\\br\\com\\projeto",
+    "\\src\\br\\com\\projeto\\dao",
+    "\\src\\br\\com\\projeto\\jbdc",
+    "\\src\\br\\com\\projeto\\model",
+    "\\src\\br\\com\\projeto\\view"
+  ],
+  "SelectedNode": "\\src\\br\\com\\projeto\\view\\FrmLogin.java",
+  "PreviewInSolutionExplorer": false
+}

@@ -136,6 +136,34 @@ public class FuncionariosDAO {
         }
     }
 
+    public List<Funcionarios> listarVendedores() {
+        try {
+            // Criando Lista
+            List<Funcionarios> lista = new ArrayList<>();
+
+            // Comando SQL para filtrar apenas os vendedores
+            String sql = "select * from tb_funcionarios where cargo = 'Vendedor'";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Funcionarios obj = new Funcionarios();
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCargo(rs.getString("cargo")); // Apenas vendedores
+
+                lista.add(obj);
+            }
+
+            return lista;
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar vendedores: " + erro);
+            return null;
+        }
+    }
+
     // Metodo alterarCliente
     public void alterarFuncionarios(Funcionarios obj) {
         try {
@@ -301,18 +329,17 @@ public class FuncionariosDAO {
                     tela.usuariologado = rs.getString("nome");
                     tela.setVisible(true);
 
-                }
-                //caso seija do tipo limit
+                } //caso seija do tipo limit
                 else if (rs.getString("nivel_acesso").equals("Usuário")) {
                     //Usuario logado com sucesso
                     JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema!");
                     FrmMenu tela = new FrmMenu();
                     tela.usuariologado = rs.getString("nome");
-                    
+
                     //Desabilitar os Menus
                     tela.menu_posicao.setEnabled(false);
                     tela.Historico.setVisible(false);
-                    
+
                     tela.setVisible(true);
 
                 }
