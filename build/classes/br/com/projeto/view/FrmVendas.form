@@ -129,7 +129,7 @@
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtcodigo_cliente" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtcpf" min="-2" pref="96" max="-2" attributes="0"/>
@@ -624,8 +624,8 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="Usu&#xe1;rio"/>
-                <StringItem index="1" value="Admin"/>
+                <StringItem index="0" value="Prazo"/>
+                <StringItem index="1" value="Vista"/>
                 <StringItem index="2" value=" "/>
               </StringArray>
             </Property>

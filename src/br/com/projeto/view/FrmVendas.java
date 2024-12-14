@@ -312,7 +312,7 @@ public class FrmVendas extends javax.swing.JFrame {
         });
 
         cbnivel_acesso1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbnivel_acesso1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuário", "Admin", " " }));
+        cbnivel_acesso1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Prazo", "Vista", " " }));
         cbnivel_acesso1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbnivel_acesso1ActionPerformed(evt);
@@ -374,7 +374,7 @@ public class FrmVendas extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtcodigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(18, 18, Short.MAX_VALUE)
                     .addComponent(jLabel3)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(txtcpf, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
