@@ -4,13 +4,31 @@
  */
 package br.com.projeto.view;
 
+import br.com.projeto.dao.ClientesDAO;
+import br.com.projeto.dao.ItensOrcamentoDAO;
+import br.com.projeto.dao.OrcamentoDAO;
+import br.com.projeto.dao.ProdutosDAO;
+import br.com.projeto.model.Clientes;
+import br.com.projeto.model.ItensOrcamento;
+import br.com.projeto.model.Orcamento;
+import br.com.projeto.model.Produtos;
 import java.awt.event.KeyEvent;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author User
  */
 public class FrmOrcamento extends javax.swing.JFrame {
+
+    Clientes obj = new Clientes();
+    double total, preco, subtotal;
+    int qtd;
+
+    DefaultTableModel carrinho;
 
     /**
      * Creates new form FrmOrcamento
@@ -32,15 +50,15 @@ public class FrmOrcamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtdata = new javax.swing.JTextField();
+        txtemissao = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtdata1 = new javax.swing.JTextField();
+        txtvalidade = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtcodigo_cliente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtnome = new javax.swing.JTextField();
         btnbuscarcliente = new javax.swing.JButton();
-        cbnivel_acesso1 = new javax.swing.JComboBox<>();
+        cbforma_pag = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         cbvendedor = new javax.swing.JComboBox<>();
@@ -53,11 +71,11 @@ public class FrmOrcamento extends javax.swing.JFrame {
         txtpreco = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtqtd = new javax.swing.JTextField();
-        txtbuscaproduto = new javax.swing.JButton();
-        btnbuscar = new javax.swing.JButton();
+        btnbuscaproduto = new javax.swing.JButton();
+        btnadicionar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_orcamento = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         txttotal = new javax.swing.JTextField();
         btnpagamento = new javax.swing.JButton();
@@ -66,16 +84,16 @@ public class FrmOrcamento extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtobs = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
-        txttotal1 = new javax.swing.JTextField();
-        btnpagamento1 = new javax.swing.JButton();
-        btnpagamento2 = new javax.swing.JButton();
-        btnpagamento3 = new javax.swing.JButton();
-        txtqtd1 = new javax.swing.JTextField();
-        txtpreco1 = new javax.swing.JTextField();
+        txtdesconto = new javax.swing.JTextField();
+        btnsalvarPDF = new javax.swing.JButton();
+        btnFechar_orcamento = new javax.swing.JButton();
+        btnimprimir = new javax.swing.JButton();
+        txtdocumentacao = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        cbSituacao = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -110,22 +128,22 @@ public class FrmOrcamento extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Emissão:");
 
-        txtdata.setEditable(false);
-        txtdata.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtdata.addActionListener(new java.awt.event.ActionListener() {
+        txtemissao.setEditable(false);
+        txtemissao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtemissao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdataActionPerformed(evt);
+                txtemissaoActionPerformed(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Validade:");
 
-        txtdata1.setEditable(false);
-        txtdata1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtdata1.addActionListener(new java.awt.event.ActionListener() {
+        txtvalidade.setEditable(false);
+        txtvalidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtvalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdata1ActionPerformed(evt);
+                txtvalidadeActionPerformed(evt);
             }
         });
 
@@ -152,11 +170,11 @@ public class FrmOrcamento extends javax.swing.JFrame {
             }
         });
 
-        cbnivel_acesso1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbnivel_acesso1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A PRAZO", "A VISTA", " ", " " }));
-        cbnivel_acesso1.addActionListener(new java.awt.event.ActionListener() {
+        cbforma_pag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbforma_pag.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A PRAZO", "A VISTA", " ", " " }));
+        cbforma_pag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbnivel_acesso1ActionPerformed(evt);
+                cbforma_pagActionPerformed(evt);
             }
         });
 
@@ -180,6 +198,11 @@ public class FrmOrcamento extends javax.swing.JFrame {
         jLabel7.setText("Código:");
 
         txtcodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodigoActionPerformed(evt);
+            }
+        });
         txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtcodigoKeyPressed(evt);
@@ -201,19 +224,24 @@ public class FrmOrcamento extends javax.swing.JFrame {
 
         txtqtd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        txtbuscaproduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtbuscaproduto.setText("Pesquisar");
-        txtbuscaproduto.addActionListener(new java.awt.event.ActionListener() {
+        btnbuscaproduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnbuscaproduto.setText("Pesquisar");
+        btnbuscaproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbuscaprodutoActionPerformed(evt);
+                btnbuscaprodutoActionPerformed(evt);
+            }
+        });
+        btnbuscaproduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnbuscaprodutoKeyPressed(evt);
             }
         });
 
-        btnbuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnbuscar.setText("Adicionar itens");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnadicionar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnadicionar.setText("Adicionar itens");
+        btnadicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
+                btnadicionarActionPerformed(evt);
             }
         });
 
@@ -227,7 +255,7 @@ public class FrmOrcamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtbuscaproduto)
+                .addComponent(btnbuscaproduto)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,7 +270,7 @@ public class FrmOrcamento extends javax.swing.JFrame {
                 .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(460, 460, 460)
-                .addComponent(btnbuscar))
+                .addComponent(btnadicionar))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +279,7 @@ public class FrmOrcamento extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtbuscaproduto)
+                    .addComponent(btnbuscaproduto)
                     .addComponent(jLabel8)
                     .addComponent(txtdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
@@ -259,14 +287,14 @@ public class FrmOrcamento extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtpreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(btnbuscar)
+                .addComponent(btnadicionar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_orcamento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        tb_orcamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -274,7 +302,7 @@ public class FrmOrcamento extends javax.swing.JFrame {
                 "Codigo", "Produto", "Qtd", "Preço", "Subtotal"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tb_orcamento);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -323,41 +351,47 @@ public class FrmOrcamento extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setText("Descontos Adic:");
 
-        txttotal1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtdesconto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        btnpagamento1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnpagamento1.setText("Salvar em PDF");
-        btnpagamento1.addActionListener(new java.awt.event.ActionListener() {
+        btnsalvarPDF.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnsalvarPDF.setText("Salvar em PDF");
+        btnsalvarPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnpagamento1ActionPerformed(evt);
+                btnsalvarPDFActionPerformed(evt);
             }
         });
 
-        btnpagamento2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnpagamento2.setText("Fechar Orçam.");
-        btnpagamento2.addActionListener(new java.awt.event.ActionListener() {
+        btnFechar_orcamento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnFechar_orcamento.setText("Fechar Orçam.");
+        btnFechar_orcamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnpagamento2ActionPerformed(evt);
+                btnFechar_orcamentoActionPerformed(evt);
             }
         });
 
-        btnpagamento3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnpagamento3.setText("Imprimir");
-        btnpagamento3.addActionListener(new java.awt.event.ActionListener() {
+        btnimprimir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnimprimir.setText("Imprimir");
+        btnimprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnpagamento3ActionPerformed(evt);
+                btnimprimirActionPerformed(evt);
             }
         });
 
-        txtqtd1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        txtpreco1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtdocumentacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("Documentação:");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setText("Situação:");
+
+        cbSituacao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Fechada", "Cancelada", " ", " " }));
+        cbSituacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSituacaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -382,15 +416,15 @@ public class FrmOrcamento extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtdata, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtemissao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtdata1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtvalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbnivel_acesso1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbforma_pag, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -400,33 +434,36 @@ public class FrmOrcamento extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtqtd1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtdocumentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtpreco1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnpagamento2)
-                    .addComponent(btnpagamento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnpagamento3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnsalvarPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnimprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFechar_orcamento, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(31, 31, 31)
-                        .addComponent(txttotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtdesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -442,18 +479,19 @@ public class FrmOrcamento extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtdata1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbnivel_acesso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
-                        .addComponent(txtqtd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtdocumentacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel16)
-                        .addComponent(txtpreco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtemissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtvalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(cbforma_pag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -471,37 +509,39 @@ public class FrmOrcamento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(19, 19, 19)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(txttotal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnpagamento2))
+                            .addComponent(txtdesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFechar_orcamento))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnpagamento1))
+                            .addComponent(btnsalvarPDF))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btncancelar)
-                            .addComponent(btnpagamento)
-                            .addComponent(btnpagamento3))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnpagamento)
+                                .addComponent(btnimprimir)))
                         .addContainerGap(14, Short.MAX_VALUE))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdataActionPerformed
+    private void txtemissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemissaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdataActionPerformed
+    }//GEN-LAST:event_txtemissaoActionPerformed
 
-    private void txtdata1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdata1ActionPerformed
+    private void txtvalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtvalidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtdata1ActionPerformed
+    }//GEN-LAST:event_txtvalidadeActionPerformed
 
     private void txtcodigo_clienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigo_clienteKeyPressed
         // TODO add your handling code here:
@@ -513,10 +553,7 @@ public class FrmOrcamento extends javax.swing.JFrame {
             obj = dao.buscaPorCodigo(txtcodigo_cliente.getText());
 
             txtnome.setText(obj.getNome());
-            txtcpf.setText(obj.getCpf());
-            txtendereco.setText(obj.getEndereco());
-            txtbairro.setText(obj.getBairro());
-            txtnumero.setText(String.valueOf(obj.getNumero()));
+
         }
     }//GEN-LAST:event_txtcodigo_clienteKeyPressed
 
@@ -524,76 +561,166 @@ public class FrmOrcamento extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnbuscarclienteActionPerformed
 
-    private void cbnivel_acesso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbnivel_acesso1ActionPerformed
+    private void cbforma_pagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbforma_pagActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbnivel_acesso1ActionPerformed
+    }//GEN-LAST:event_cbforma_pagActionPerformed
 
     private void cbvendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbvendedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbvendedorActionPerformed
 
     private void txtcodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyPressed
-        // busca por codigo do Produtos
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Produtos obj = new Produtos();
-            ProdutosDAO dao = new ProdutosDAO();
+            try {
+                Produtos obj = new Produtos();
+                ProdutosDAO dao = new ProdutosDAO();
 
-            obj = dao.buscaPorCodigo(Integer.parseInt(txtcodigo.getText()));
-            txtdescricao.setText(obj.getDescricao());
-            txtpreco.setText(String.valueOf(obj.getPreco()));
+                obj = dao.buscaPorCodigo(Integer.parseInt(txtcodigo.getText()));
+
+                if (obj != null) {
+                    txtdescricao.setText(obj.getDescricao());
+                    txtpreco.setText(String.valueOf(obj.getPreco()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Código inválido! Digite um número.");
+            }
         }
+
     }//GEN-LAST:event_txtcodigoKeyPressed
 
-    private void txtbuscaprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscaprodutoActionPerformed
+    private void btnbuscaprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaprodutoActionPerformed
 
-    }//GEN-LAST:event_txtbuscaprodutoActionPerformed
+    }//GEN-LAST:event_btnbuscaprodutoActionPerformed
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+    private void btnadicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadicionarActionPerformed
         // TODO add your handling code here:
-        qtd = Integer.parseInt(txtqtd.getText());
-        preco = Double.parseDouble(txtpreco.getText());
+        try {
+            qtd = Integer.parseInt(txtqtd.getText());
+            preco = Double.parseDouble(txtpreco.getText());
 
-        subtotal = qtd * preco;
-        total += subtotal;
-        txttotal.setText(String.valueOf(total));
+            subtotal = qtd * preco;
+            total += subtotal;
 
-        // add o produto no carrinho
-        carrinho = (DefaultTableModel) jTable1.getModel();
+            txttotal.setText(String.valueOf(total));
 
-        carrinho.addRow(new Object[]{
-            txtcodigo.getText(),
-            txtdescricao.getText(),
-            txtqtd.getText(),
-            txtpreco.getText(),
-            subtotal
-        });
-    }//GEN-LAST:event_btnbuscarActionPerformed
+            // Adiciona o produto no carrinho
+            carrinho = (DefaultTableModel) tb_orcamento.getModel();
+
+            carrinho.addRow(new Object[]{
+                txtcodigo.getText(),
+                txtdescricao.getText(),
+                txtqtd.getText(),
+                txtpreco.getText(),
+                subtotal
+            });
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Quantidade ou preço inválidos.");
+        }
+    }//GEN-LAST:event_btnadicionarActionPerformed
 
     private void btnpagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpagamentoActionPerformed
         // Tala pagamentos
         FrmPagamentos telap = new FrmPagamentos();
         telap.txttotal.setText(String.valueOf(total));
-        telap.clientes =obj;
+        telap.clientes = obj;
         telap.carrinho = carrinho;
         telap.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnpagamentoActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        // TODO add your handling code here:
+
+        // Limpar os campos
+        txtcodigo.setText("");
+        txtdescricao.setText("");
+        txtpreco.setText("");
+        txtqtd.setText("");
+        txttotal.setText("");
+
+        // Limpar a tabela
+        DefaultTableModel modelo = (DefaultTableModel) tb_orcamento.getModel();
+        modelo.setRowCount(0);
+
+        // Resetar o total
+        total = 0;
+
+
     }//GEN-LAST:event_btncancelarActionPerformed
 
-    private void btnpagamento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpagamento1ActionPerformed
+    private void btnsalvarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalvarPDFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnpagamento1ActionPerformed
+    }//GEN-LAST:event_btnsalvarPDFActionPerformed
 
-    private void btnpagamento2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpagamento2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnpagamento2ActionPerformed
+    private void btnFechar_orcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechar_orcamentoActionPerformed
+        // Captura de dados da interface
+        String documentacao = txtdocumentacao.getText();
+        String situacao = cbSituacao.getSelectedItem().toString(); // Exemplo com ComboBox
+        Date emissao = (Date) txtemissao.getDate(); // Supondo que txtemissao seja um campo Date
+        Date validade = (Date) txtvalidade.getDate(); // Supondo que txtvalidade seja um campo Date
+        String formaPagamento = cbforma_pag.getSelectedItem().toString(); // Combobox para forma de pagamento
+        String vendedor = cbvendedor.getSelectedItem().toString(); // Combobox para vendedor
+        double totalVenda = 0.0; // Inicializa o valor total da venda
 
-    private void btnpagamento3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpagamento3ActionPerformed
+        // Criação de objeto para o orçamento
+        Orcamento orcamento = new Orcamento();
+        orcamento.setDocumentacao(documentacao);
+        orcamento.setSituacao(situacao);
+        orcamento.setDataEmissao(emissao);
+        orcamento.setValidade(validade);
+        orcamento.setFormaPagamento(formaPagamento);
+        orcamento.setVendedor(vendedor);
+
+        // Salvar o orçamento no banco de dados
+        OrcamentoDAO dao = new OrcamentoDAO();
+        dao.salvarOrcamento(orcamento);  // Salva o orçamento principal
+
+        // Agora salvar os itens do orçamento
+        ItensOrcamentoDAO itensDAO = new ItensOrcamentoDAO();
+        for (int i = 0; i < tb_orcamento.getRowCount(); i++) {
+            ItensOrcamento item = new ItensOrcamento();
+            item.setIdOrcamento(orcamento.getIdOrcamento()); // Atribuindo o ID do orçamento
+            item.setCodigoProduto(Integer.parseInt((String) tb_orcamento.getValueAt(i, 0))); // Código do produto
+            item.setQtd(Integer.parseInt((String) tb_orcamento.getValueAt(i, 2))); // Quantidade
+            item.setPrecoUnitario(Double.parseDouble((String) tb_orcamento.getValueAt(i, 3))); // Preço unitário
+            item.setSubtotal((Double) tb_orcamento.getValueAt(i, 4)); // Subtotal do item
+
+            // Calcula o total da venda somando os subtotais dos itens
+            totalVenda += item.getSubtotal();
+
+            // Salvar o item no banco
+            itensDAO.adicionarItem(item);
+        }
+
+        // Atualiza o total da venda no orçamento
+        orcamento.setTotalVenda(String.valueOf(totalVenda));
+        dao.atualizarOrcamento(orcamento);
+
+        // Mensagem de sucesso
+        JOptionPane.showMessageDialog(this, "Orçamento fechado com sucesso!");
+
+        // Limpar campos ou fechar tela, conforme necessidade
+        limparCampos();
+        this.dispose(); // Fechar a tela do orçamento, por exemplo
+    }//GEN-LAST:event_btnFechar_orcamentoActionPerformed
+
+    private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnpagamento3ActionPerformed
+    }//GEN-LAST:event_btnimprimirActionPerformed
+
+    private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoActionPerformed
+
+    private void btnbuscaprodutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnbuscaprodutoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnbuscaprodutoKeyPressed
+
+    private void cbSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSituacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -631,14 +758,16 @@ public class FrmOrcamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btnFechar_orcamento;
+    private javax.swing.JButton btnadicionar;
+    private javax.swing.JButton btnbuscaproduto;
     private javax.swing.JButton btnbuscarcliente;
     private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btnimprimir;
     private javax.swing.JButton btnpagamento;
-    private javax.swing.JButton btnpagamento1;
-    private javax.swing.JButton btnpagamento2;
-    private javax.swing.JButton btnpagamento3;
-    private javax.swing.JComboBox<String> cbnivel_acesso1;
+    private javax.swing.JButton btnsalvarPDF;
+    private javax.swing.JComboBox<String> cbSituacao;
+    private javax.swing.JComboBox<String> cbforma_pag;
     private javax.swing.JComboBox<String> cbvendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -662,20 +791,18 @@ public class FrmOrcamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton txtbuscaproduto;
+    private javax.swing.JTable tb_orcamento;
     private javax.swing.JTextField txtcodigo;
     private javax.swing.JTextField txtcodigo_cliente;
-    private javax.swing.JTextField txtdata;
-    private javax.swing.JTextField txtdata1;
+    private javax.swing.JTextField txtdesconto;
     private javax.swing.JTextField txtdescricao;
+    private javax.swing.JTextField txtdocumentacao;
+    private javax.swing.JTextField txtemissao;
     private javax.swing.JTextField txtnome;
     private javax.swing.JTextArea txtobs;
     private javax.swing.JTextField txtpreco;
-    private javax.swing.JTextField txtpreco1;
     private javax.swing.JTextField txtqtd;
-    private javax.swing.JTextField txtqtd1;
     private javax.swing.JTextField txttotal;
-    private javax.swing.JTextField txttotal1;
+    private javax.swing.JTextField txtvalidade;
     // End of variables declaration//GEN-END:variables
 }
